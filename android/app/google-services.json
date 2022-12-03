@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "825638715348",
+    "firebase_url": "https://portfolio-28840-default-rtdb.firebaseio.com",
+    "project_id": "portfolio-28840",
+    "storage_bucket": "portfolio-28840.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825638715348:android:7cd4a2ace6b69bd693a041",
+        "android_client_info": {
+          "package_name": "com.ericknamukolo.portfolio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825638715348-3shrger5ov9k529sbj0bc136o9b3hls2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDa9rIw_yjCnARZCtz45-Dj7Mm-PBFOg0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825638715348-3shrger5ov9k529sbj0bc136o9b3hls2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
