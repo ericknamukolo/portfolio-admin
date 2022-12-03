@@ -24,7 +24,7 @@ class Amour extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Amor',
+        title: 'Erick | Portfolio',
         theme: ThemeData(
           fontFamily: 'Montserrat',
         ),
