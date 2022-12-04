@@ -6,11 +6,14 @@ import 'package:portfolio_admin/providers/auth.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 
 import '../constants/colors.dart';
+import '../services/push_notification.dart';
 import 'messages/message_nav_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home-screen';
-  const HomeScreen({super.key});
+
+  final bool newMessageNotifcation;
+  const HomeScreen({this.newMessageNotifcation = false, super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -39,20 +42,26 @@ class _HomeScreenState extends State<HomeScreen> {
     SizedBox(),
     SizedBox(),
   ];
+
+  @override
+  void initState() {
+    PushNotification.inititialize(context);
+    if (widget.newMessageNotifcation) {
+      _selectedIndex = 1;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: _selectedIndex == 2 || _selectedIndex == 3
-          ? Container(
-              height: 50,
-              width: 50,
-              child: FloatingActionButton(
-                backgroundColor: kSecondaryColor,
-                onPressed: () {},
-                child: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
+          ? FloatingActionButton(
+              backgroundColor: kSecondaryColor,
+              onPressed: () {},
+              child: Icon(
+                Icons.add,
+                color: Colors.white,
               ),
             )
           : null,
