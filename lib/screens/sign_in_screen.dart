@@ -43,6 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
             children: [
               Container(
                 padding: const EdgeInsets.all(10),
+                margin: EdgeInsets.symmetric(vertical: 40),
                 child: const AvatarGlow(
                   endRadius: 160.0,
                   animate: true,
