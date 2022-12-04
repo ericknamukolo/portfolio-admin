@@ -35,64 +35,66 @@ class _SignInScreenState extends State<SignInScreen> {
       floatingActionButton:
           Visibility(visible: _isLoading, child: CustomLoading()),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              // decoration: BoxDecoration(
-              //   color: Colors.white,
-              //   boxShadow: [
-              //     BoxShadow(
-              //       color: const Color(0xff000000).withOpacity(0.12),
-              //       blurRadius: 6.0,
-              //       offset: const Offset(0.0, 3.0),
-              //     )
-              //   ],
-              // ),
-              child: const AvatarGlow(
-                endRadius: 160.0,
-                animate: true,
-                glowColor: kPrimaryColor,
-                repeat: true,
-                duration: Duration(milliseconds: 2000),
-                // repeatPauseDuration: Duration(milliseconds: 30),
-                child: CircleAvatar(
-                  foregroundImage: AssetImage('assets/images/logo.png'),
-                  backgroundColor: Colors.white,
-                  radius: 90,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(10),
+                // decoration: BoxDecoration(
+                //   color: Colors.white,
+                //   boxShadow: [
+                //     BoxShadow(
+                //       color: const Color(0xff000000).withOpacity(0.12),
+                //       blurRadius: 6.0,
+                //       offset: const Offset(0.0, 3.0),
+                //     )
+                //   ],
+                // ),
+                child: const AvatarGlow(
+                  endRadius: 160.0,
+                  animate: true,
+                  glowColor: kPrimaryColor,
+                  repeat: true,
+                  duration: Duration(milliseconds: 2000),
+                  // repeatPauseDuration: Duration(milliseconds: 30),
+                  child: CircleAvatar(
+                    foregroundImage: AssetImage('assets/images/logo.png'),
+                    backgroundColor: Colors.white,
+                    radius: 90,
+                  ),
                 ),
               ),
-            ),
-            CustomTextField(
-                hint: 'Email', preIcon: Icons.email_rounded, data: _email),
-            CustomTextField(
-                hint: 'Password', preIcon: Icons.lock, data: _pwd, obs: true),
-            CustomButton(
-              btnText: 'Sign In',
-              isLoading: _isLoading,
-              click: () async {
-                try {
-                  setState(() => _isLoading = true);
-                  await Auth.signIn(
-                    context: context,
-                    email: _email.text.trim(),
-                    pwd: _pwd.text.trim(),
-                  );
-                } catch (e) {
-                  BotToast.showCustomNotification(
-                      duration: Duration(seconds: 4),
-                      toastBuilder: (context) => CustomToast(
-                            message: e.toString().split(']')[1],
-                            type: 'error',
-                          ));
-                  setState(() => _isLoading = false);
-                }
-              },
-            ),
-          ],
+              CustomTextField(
+                  hint: 'Email', preIcon: Icons.email_rounded, data: _email),
+              CustomTextField(
+                  hint: 'Password', preIcon: Icons.lock, data: _pwd, obs: true),
+              CustomButton(
+                btnText: 'Sign In',
+                isLoading: _isLoading,
+                click: () async {
+                  try {
+                    setState(() => _isLoading = true);
+                    await Auth.signIn(
+                      context: context,
+                      email: _email.text.trim(),
+                      pwd: _pwd.text.trim(),
+                    );
+                  } catch (e) {
+                    BotToast.showCustomNotification(
+                        duration: Duration(seconds: 4),
+                        toastBuilder: (context) => CustomToast(
+                              message: e.toString().split(']')[1],
+                              type: 'error',
+                            ));
+                    setState(() => _isLoading = false);
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

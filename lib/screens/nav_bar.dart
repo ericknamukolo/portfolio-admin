@@ -41,21 +41,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Visibility(
-        visible: _selectedIndex == 2 || _selectedIndex == 3,
-        child: Container(
-          height: 50,
-          width: 50,
-          child: FloatingActionButton(
-            backgroundColor: kSecondaryColor,
-            onPressed: () {},
-            child: Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
+      floatingActionButton: _selectedIndex == 2 || _selectedIndex == 3
+          ? Container(
+              height: 50,
+              width: 50,
+              child: FloatingActionButton(
+                backgroundColor: kSecondaryColor,
+                onPressed: () {},
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              ),
+            )
+          : null,
       appBar: CustomAppBar(
           title: getAppBarName(),
           showNotification: true,
