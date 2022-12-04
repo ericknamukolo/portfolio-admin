@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio_admin/constants/constants.dart';
-import 'package:portfolio_admin/screens/home/home_screen.dart';
+import 'package:portfolio_admin/screens/nav_bar.dart';
 import 'package:portfolio_admin/screens/sign_in_screen.dart';
 
 class Auth {

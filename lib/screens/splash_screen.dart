@@ -5,7 +5,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:portfolio_admin/constants/colors.dart';
 import 'package:portfolio_admin/constants/constants.dart';
 import 'package:portfolio_admin/constants/text.dart';
-import 'package:portfolio_admin/screens/home/home_screen.dart';
+import 'package:portfolio_admin/screens/nav_bar.dart';
 import 'package:portfolio_admin/screens/sign_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {

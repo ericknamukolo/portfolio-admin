@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:portfolio_admin/screens/home/home_screen.dart';
+import 'package:portfolio_admin/screens/nav_bar.dart';
 import 'package:portfolio_admin/screens/sign_in_screen.dart';
 import 'package:portfolio_admin/screens/splash_screen.dart';
 
