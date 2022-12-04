@@ -11,6 +11,8 @@ class Auth {
     try {
       await firebaseAuth.signInWithEmailAndPassword(
           email: email, password: pwd);
+      final fcmToken = await firebaseMessaging.getToken();
+      await adminRef.child('fcmToken').set(fcmToken);
       Navigator.of(context).popUntil((route) => route.isFirst);
       Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
     } catch (e) {

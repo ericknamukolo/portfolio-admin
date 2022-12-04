@@ -6,6 +6,7 @@ import 'package:portfolio_admin/providers/auth.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 
 import '../constants/colors.dart';
+import '../services/push_notification.dart';
 import 'messages/message_nav_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -39,6 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
     SizedBox(),
     SizedBox(),
   ];
+
+  @override
+  void initState() {
+    PushNotification.inititialize(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
