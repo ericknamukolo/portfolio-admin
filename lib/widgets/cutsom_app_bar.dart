@@ -5,12 +5,14 @@ import '../constants/text.dart';
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool showLeading;
+  final bool showNotification;
   final IconButton? action;
   const CustomAppBar({
     Key? key,
     required this.title,
     this.action,
     this.showLeading = false,
+    this.showNotification = false,
   }) : super(key: key);
 
   @override
@@ -28,10 +30,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: showLeading
           ? IconButton(
               onPressed: () {
-                Navigator.of(context).pop();
+                if (showNotification) {
+                } else {
+                  Navigator.of(context).pop();
+                }
               },
-              icon: const Icon(
-                Icons.chevron_left_rounded,
+              icon: Icon(
+                !showNotification
+                    ? Icons.chevron_left_rounded
+                    : Icons.notifications_none_rounded,
                 color: Colors.white,
               ),
             )
