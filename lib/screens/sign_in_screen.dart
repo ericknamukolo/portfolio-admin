@@ -43,16 +43,6 @@ class _SignInScreenState extends State<SignInScreen> {
             children: [
               Container(
                 padding: const EdgeInsets.all(10),
-                // decoration: BoxDecoration(
-                //   color: Colors.white,
-                //   boxShadow: [
-                //     BoxShadow(
-                //       color: const Color(0xff000000).withOpacity(0.12),
-                //       blurRadius: 6.0,
-                //       offset: const Offset(0.0, 3.0),
-                //     )
-                //   ],
-                // ),
                 child: const AvatarGlow(
                   endRadius: 160.0,
                   animate: true,

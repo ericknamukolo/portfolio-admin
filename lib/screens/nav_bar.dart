@@ -6,6 +6,7 @@ import 'package:portfolio_admin/providers/auth.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 
 import '../constants/colors.dart';
+import 'messages/message_nav_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home-screen';
@@ -34,7 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     SizedBox(),
-    SizedBox(),
+    MessageNavScreen(),
     SizedBox(),
     SizedBox(),
   ];
