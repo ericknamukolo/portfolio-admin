@@ -6,6 +6,7 @@ import 'package:portfolio_admin/providers/auth.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 
 import '../constants/colors.dart';
+import 'messages/message_nav_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home-screen';
@@ -34,28 +35,27 @@ class _HomeScreenState extends State<HomeScreen> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     SizedBox(),
-    SizedBox(),
+    MessageNavScreen(),
     SizedBox(),
     SizedBox(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: Visibility(
-        visible: _selectedIndex == 2 || _selectedIndex == 3,
-        child: Container(
-          height: 50,
-          width: 50,
-          child: FloatingActionButton(
-            backgroundColor: kSecondaryColor,
-            onPressed: () {},
-            child: Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
+      floatingActionButton: _selectedIndex == 2 || _selectedIndex == 3
+          ? Container(
+              height: 50,
+              width: 50,
+              child: FloatingActionButton(
+                backgroundColor: kSecondaryColor,
+                onPressed: () {},
+                child: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              ),
+            )
+          : null,
       appBar: CustomAppBar(
           title: getAppBarName(),
           showNotification: true,
