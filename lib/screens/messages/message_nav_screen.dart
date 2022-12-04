@@ -69,8 +69,10 @@ class MessageNavScreen extends StatelessWidget {
                     itemBuilder: ((context, index) {
                       Map messageData = snapshot.data!.docs[index].data()
                           as Map<String, dynamic>;
-                      logger.i(messageData);
-                      return MessageCard(data: messageData);
+
+                      return MessageCard(
+                          data: messageData,
+                          docId: snapshot.data!.docs[index].id);
                     }),
                     itemCount: snapshot.data!.docs.length,
                     shrinkWrap: true,

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
+import 'package:portfolio_admin/constants/constants.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
 
 class MessageCard extends StatelessWidget {
   final Map<dynamic, dynamic> data;
+  final String docId;
   const MessageCard({
     Key? key,
     required this.data,
+    required this.docId,
   }) : super(key: key);
 
   @override
@@ -51,13 +54,21 @@ class MessageCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(data['sender'], style: kBodyTitleTextStyleGrey),
-                  Text(data['email'], style: kBodyTextStyleGrey),
+                  SelectableText(data['email'], style: kBodyTextStyleGrey),
                 ],
               ),
               const Spacer(),
-              Icon(
-                Icons.delete_rounded,
-                color: kPrimaryColor,
+              GestureDetector(
+                onLongPress: () async {
+                  await firebaseFirestore
+                      .collection('messages')
+                      .doc(docId)
+                      .delete();
+                },
+                child: Icon(
+                  Icons.delete_rounded,
+                  color: kPrimaryColor,
+                ),
               ),
             ],
           ),
