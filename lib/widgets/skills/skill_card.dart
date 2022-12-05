@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
-import 'package:portfolio_admin/constants/constants.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
 
-class MessageCard extends StatelessWidget {
-  final Map<dynamic, dynamic> data;
-  final String? docId;
-  const MessageCard({
+class SkillCard extends StatelessWidget {
+  const SkillCard({
     Key? key,
-    required this.data,
-    this.docId,
   }) : super(key: key);
 
   @override
@@ -45,26 +39,16 @@ class MessageCard extends StatelessWidget {
                   shape: BoxShape.circle,
                   color: kSecondaryColor,
                 ),
-                child: Icon(
-                  Iconsax.user,
-                  color: Colors.white,
-                ),
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(data['sender'], style: kBodyTitleTextStyleGrey),
-                  SelectableText(data['email'], style: kBodyTextStyleGrey),
+                  Text('JavaScript', style: kBodyTitleTextStyleGrey),
                 ],
               ),
               const Spacer(),
               GestureDetector(
-                onLongPress: () async {
-                  await firebaseFirestore
-                      .collection('messages')
-                      .doc(docId)
-                      .delete();
-                },
+                onLongPress: () async {},
                 child: Icon(
                   Icons.delete_rounded,
                   color: kPrimaryColor,
@@ -74,13 +58,13 @@ class MessageCard extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            data['message'],
+            'JavaScript, often abbreviated as JS, is a programming language that is one of the core technologies of the World Wide Web, alongside HTML and CSS.',
             style: kBodyTextStyleGrey.copyWith(fontSize: 11),
           ),
           Align(
             alignment: Alignment.bottomRight,
             child: Text(
-                '${DateFormat.yMMMEd().format(data['createdAt'].toDate())} at ${DateFormat.Hm().format(data['createdAt'].toDate())}',
+                '${DateFormat.yMMMEd().format(DateTime.now())} at ${DateFormat.Hm().format(DateTime.now())}',
                 style: kBodyTextStyleGrey.copyWith(fontSize: 9)),
           ),
         ],
