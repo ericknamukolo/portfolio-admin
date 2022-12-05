@@ -1,19 +1,43 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio_admin/firebase_options.dart';
 import 'package:portfolio_admin/generate_route.dart';
-import 'package:provider/provider.dart';
+import 'package:portfolio_admin/services/push_notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'constants/constants.dart';
 
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  PushNotification.goToMessages();
+}
+
+final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  await messaging.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: true,
+    provisional: false,
+  );
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    PushNotification.newMessage();
+  });
+
+  FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    PushNotification.goToMessages();
+  });
+
   runApp(const AdminPortfolio());
 }
 
@@ -33,6 +57,7 @@ class AdminPortfolio extends StatelessWidget {
         BotToastNavigatorObserver(),
       ],
       onGenerateRoute: generateRoute,
+      navigatorKey: navigatorKey,
     );
   }
 }

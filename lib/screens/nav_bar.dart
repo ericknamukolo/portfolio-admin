@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    PushNotification.inititialize(context);
+    //   PushNotification.inititialize(context);
     if (widget.newMessageNotifcation) {
       _selectedIndex = 1;
     }

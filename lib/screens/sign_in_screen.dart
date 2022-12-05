@@ -50,7 +50,6 @@ class _SignInScreenState extends State<SignInScreen> {
                   glowColor: kPrimaryColor,
                   repeat: true,
                   duration: Duration(milliseconds: 2000),
-                  // repeatPauseDuration: Duration(milliseconds: 30),
                   child: CircleAvatar(
                     foregroundImage: AssetImage('assets/images/logo.png'),
                     backgroundColor: Colors.white,
