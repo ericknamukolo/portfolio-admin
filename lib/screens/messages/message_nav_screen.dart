@@ -33,8 +33,11 @@ class MessageNavScreen extends StatelessWidget {
 
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Center(
-                    child: LoadingAnimationWidget.stretchedDots(
-                        color: kPrimaryColor, size: 35));
+                    child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 60.0),
+                  child: LoadingAnimationWidget.stretchedDots(
+                      color: kPrimaryColor, size: 35),
+                ));
               }
               return Column(
                 children: [

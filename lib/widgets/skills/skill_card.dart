@@ -63,11 +63,14 @@ class SkillCard extends StatelessWidget {
                     color: skill.isHidden ? kGreyColor : kPrimaryColor,
                   ),
                 ),
-                SizedBox(width: 10),
+                SizedBox(width: 20),
                 GestureDetector(
-                  onTap: () async {},
+                  onLongPress: () async {
+                    await Provider.of<Skills>(context, listen: false)
+                        .deleteSkill(skill.id);
+                  },
                   child: Icon(
-                    Icons.edit,
+                    Icons.delete_rounded,
                     color: kPrimaryColor,
                   ),
                 ),

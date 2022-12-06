@@ -63,4 +63,10 @@ class Skills with ChangeNotifier {
     await fetchSkills();
     notifyListeners();
   }
+
+  Future<void> deleteSkill(String id) async {
+    await adminRef.child('skills').child(id).remove();
+    await fetchSkills();
+    notifyListeners();
+  }
 }
