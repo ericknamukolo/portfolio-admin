@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
+import 'package:portfolio_admin/models/skill.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
+import '../../providers/skill/skills.dart';
 
-class SkillCard extends StatefulWidget {
+class SkillCard extends StatelessWidget {
+  final Skill skill;
   const SkillCard({
     Key? key,
+    required this.skill,
   }) : super(key: key);
 
   @override
-  State<SkillCard> createState() => _SkillCardState();
-}
-
-class _SkillCardState extends State<SkillCard> {
-  bool isHidden = false;
-  @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: isHidden ? .4 : 1,
+      opacity: skill.isHidden ? .4 : 1,
       child: Container(
         padding: EdgeInsets.all(10),
         margin: EdgeInsets.symmetric(horizontal: 15),
@@ -45,25 +44,23 @@ class _SkillCardState extends State<SkillCard> {
                   margin: EdgeInsets.only(right: 10),
                   height: 55,
                   width: 55,
-                  decoration: BoxDecoration(
-                    color: kSecondaryColor,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
+                  child: Image.network(skill.iconUrl),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('JavaScript', style: kBodyTitleTextStyleGrey),
+                    Text(skill.name, style: kBodyTitleTextStyleGrey),
                   ],
                 ),
                 const Spacer(),
                 GestureDetector(
-                  onTap: () {
-                    setState(() => isHidden = !isHidden);
+                  onTap: () async {
+                    await Provider.of<Skills>(context, listen: false)
+                        .toggleVisibility(skill.id, skill.isHidden);
                   },
                   child: Icon(
-                    isHidden ? Iconsax.eye_slash5 : Iconsax.eye4,
-                    color: isHidden ? kGreyColor : kPrimaryColor,
+                    skill.isHidden ? Iconsax.eye_slash5 : Iconsax.eye4,
+                    color: skill.isHidden ? kGreyColor : kPrimaryColor,
                   ),
                 ),
                 SizedBox(width: 10),
@@ -78,13 +75,13 @@ class _SkillCardState extends State<SkillCard> {
             ),
             SizedBox(height: 10),
             Text(
-              'JavaScript, often abbreviated as JS, is a programming language that is one of the core technologies of the World Wide Web, alongside HTML and CSS.',
+              skill.des,
               style: kBodyTextStyleGrey.copyWith(fontSize: 11),
             ),
             Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                  '${DateFormat.yMMMEd().format(DateTime.now())} at ${DateFormat.Hm().format(DateTime.now())}',
+                  '${DateFormat.yMMMEd().format(skill.date)} at ${DateFormat.Hm().format(skill.date)}',
                   style: kBodyTextStyleGrey.copyWith(fontSize: 9)),
             ),
           ],

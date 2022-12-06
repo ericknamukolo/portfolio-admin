@@ -11,6 +11,7 @@ import 'package:portfolio_admin/widgets/custom_loading.dart';
 import 'package:portfolio_admin/widgets/custom_text_field.dart';
 import 'package:portfolio_admin/widgets/custom_toast.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/colors.dart';
 
@@ -102,22 +103,24 @@ class _AddSkillScreenState extends State<AddSkillScreen> {
               data: _des,
             ),
             const Spacer(),
-            CustomButton(
-              btnText: 'Add Skill',
-              isLoading: _isLoading,
-              click: () async {
-                try {
-                  setState(() => _isLoading = true);
-                  await Skills.addSkill(_icon!, _name.text, _des.text);
-                  setState(() => _isLoading = false);
-                  Navigator.of(context).pop();
-                } catch (e) {
-                  BotToast.showCustomNotification(
-                      toastBuilder: (context) =>
-                          CustomToast(message: e.toString(), type: 'error'));
-                  setState(() => _isLoading = false);
-                }
-              },
+            Consumer<Skills>(
+              builder: (context, skills, _) => CustomButton(
+                btnText: 'Add Skill',
+                isLoading: _isLoading,
+                click: () async {
+                  try {
+                    setState(() => _isLoading = true);
+                    await skills.addSkill(_icon!, _name.text, _des.text);
+                    setState(() => _isLoading = false);
+                    Navigator.of(context).pop();
+                  } catch (e) {
+                    BotToast.showCustomNotification(
+                        toastBuilder: (context) =>
+                            CustomToast(message: e.toString(), type: 'error'));
+                    setState(() => _isLoading = false);
+                  }
+                },
+              ),
             ),
           ],
         ),
