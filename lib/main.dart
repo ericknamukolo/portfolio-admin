@@ -4,9 +4,11 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio_admin/firebase_options.dart';
 import 'package:portfolio_admin/generate_route.dart';
+import 'package:portfolio_admin/providers/skill/skills.dart';
 import 'package:portfolio_admin/services/push_notification.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:permission_handler/permission_handler.dart';
 import 'constants/constants.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -20,6 +22,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Permission.notification.request();
+
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await messaging.requestPermission(
@@ -46,18 +50,23 @@ class AdminPortfolio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Erick | Portfolio',
-      theme: ThemeData(
-        fontFamily: 'Montserrat',
-      ),
-      builder: BotToastInit(),
-      navigatorObservers: [
-        BotToastNavigatorObserver(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => Skills()),
       ],
-      onGenerateRoute: generateRoute,
-      navigatorKey: navigatorKey,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Erick | Portfolio',
+        theme: ThemeData(
+          fontFamily: 'Montserrat',
+        ),
+        builder: BotToastInit(),
+        navigatorObservers: [
+          BotToastNavigatorObserver(),
+        ],
+        onGenerateRoute: generateRoute,
+        navigatorKey: navigatorKey,
+      ),
     );
   }
 }
