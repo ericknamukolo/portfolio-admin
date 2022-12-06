@@ -32,8 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton:
-          Visibility(visible: _isLoading, child: CustomLoading()),
+      floatingActionButton: _isLoading ? CustomLoading() : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: SingleChildScrollView(
         child: Container(

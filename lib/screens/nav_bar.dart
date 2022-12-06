@@ -3,6 +3,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:portfolio_admin/constants/text.dart';
 import 'package:portfolio_admin/providers/auth.dart';
+import 'package:portfolio_admin/screens/skills/add_skill_screen.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 
 import '../constants/colors.dart';
@@ -59,7 +60,11 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: _selectedIndex == 2 || _selectedIndex == 3
           ? FloatingActionButton(
               backgroundColor: kSecondaryColor,
-              onPressed: () {},
+              onPressed: () {
+                if (_selectedIndex == 2) {
+                  Navigator.of(context).pushNamed(AddSkillScreen.routeName);
+                }
+              },
               child: Icon(
                 Icons.add,
                 color: Colors.white,

@@ -6,7 +6,7 @@ import 'package:portfolio_admin/firebase_options.dart';
 import 'package:portfolio_admin/generate_route.dart';
 import 'package:portfolio_admin/services/push_notification.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:permission_handler/permission_handler.dart';
 import 'constants/constants.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -20,6 +20,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Permission.notification.request();
+
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await messaging.requestPermission(
