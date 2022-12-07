@@ -60,13 +60,14 @@ class Skills with ChangeNotifier {
 
   Future<void> toggleVisibility(String id, bool state) async {
     await adminRef.child('skills').child(id).update({'hidden': !state});
-    await fetchSkills();
+    _skills.firstWhere((skill) => skill.id == id).isHidden = !state;
     notifyListeners();
   }
 
   Future<void> deleteSkill(String id) async {
     await adminRef.child('skills').child(id).remove();
-    await fetchSkills();
+    Skill selectedSkill = _skills.firstWhere((skill) => skill.id == id);
+    _skills.remove(selectedSkill);
     notifyListeners();
   }
 }
