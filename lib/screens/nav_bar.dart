@@ -4,10 +4,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:portfolio_admin/constants/text.dart';
 import 'package:portfolio_admin/providers/auth.dart';
 import 'package:portfolio_admin/screens/skills/add_skill_screen.dart';
+import 'package:portfolio_admin/screens/home/home_nav_screen.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
-
 import '../constants/colors.dart';
-import '../services/push_notification.dart';
 import 'messages/message_nav_screen.dart';
 import 'skills/skills_nav_screen.dart';
 
@@ -39,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   static const List<Widget> _widgetOptions = <Widget>[
-    SizedBox(),
+    HomeNavScreen(),
     MessageNavScreen(),
     SkillsNavScreen(),
     SizedBox(),
