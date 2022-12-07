@@ -1,0 +1,61 @@
+import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+
+import '../../constants/colors.dart';
+import '../../constants/text.dart';
+
+class VisitsCard extends StatelessWidget {
+  final int count;
+  const VisitsCard({
+    Key? key,
+    required this.count,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(10),
+      margin: EdgeInsets.only(bottom: 10),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xff000000).withOpacity(0.12),
+            blurRadius: 6.0,
+            offset: const Offset(0.0, 3.0),
+          )
+        ],
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: kPrimaryColor.withOpacity(.15),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              Iconsax.favorite_chart5,
+              color: kPrimaryColor,
+            ),
+            margin: const EdgeInsets.symmetric(vertical: 3),
+            padding: EdgeInsets.all(8),
+          ),
+          Text(
+            '+$count',
+            style: kBodyTextStyleGrey.copyWith(
+              color: kSecondaryColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 24,
+            ),
+          ),
+          Text('Total Visits',
+              style: kBodyTextStyleGrey.copyWith(fontSize: 11)),
+        ],
+      ),
+    );
+  }
+}

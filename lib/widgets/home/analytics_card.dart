@@ -38,7 +38,7 @@ class AnalyticsCard extends StatelessWidget {
       if (analyticsTitle == 'cv') {
         icon = Icon(
           Icons.download_rounded,
-          color: kSecondaryColor,
+          color: kPrimaryColor,
         );
       } else if (analyticsTitle == 'fb') {
         icon = Icon(
@@ -94,7 +94,7 @@ class AnalyticsCard extends StatelessWidget {
             padding: EdgeInsets.all(8),
           ),
           Text(
-            '+$count',
+            '$count',
             style: kBodyTextStyleGrey.copyWith(
               color: kSecondaryColor,
               fontWeight: FontWeight.w600,

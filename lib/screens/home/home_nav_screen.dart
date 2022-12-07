@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../../constants/colors.dart';
 import '../../constants/constants.dart';
 import '../../constants/text.dart';
 import '../../widgets/home/analytics_card.dart';
+import '../../widgets/home/visits_card.dart';
 
 class HomeNavScreen extends StatelessWidget {
   const HomeNavScreen({
@@ -25,7 +27,7 @@ class HomeNavScreen extends StatelessWidget {
       'whatsApp'
     ];
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
       child: StreamBuilder<DocumentSnapshot>(
           stream: _analyticsStream,
           builder:
@@ -45,7 +47,13 @@ class HomeNavScreen extends StatelessWidget {
               ));
             }
             return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text('Portfolio Visits', style: kBodyTitleTextStyleGrey),
+                SizedBox(height: 6),
+                VisitsCard(count: snapshot.data!.get('visit')),
+                Text('Clicks', style: kBodyTitleTextStyleGrey),
+                SizedBox(height: 6),
                 GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
