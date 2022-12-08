@@ -1,8 +1,10 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:portfolio_admin/providers/noti.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 import 'package:provider/provider.dart';
+import '../../constants/colors.dart';
 import '../../widgets/custom_toast.dart';
 
 class NotificationsScreen extends StatefulWidget {
@@ -45,6 +47,12 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: 'Notifications', showLeading: true),
+      body: _isLoading
+          ? Center(
+              child: LoadingAnimationWidget.fourRotatingDots(
+                  color: kPrimaryColor, size: 50.0),
+            )
+          : SizedBox(),
     );
   }
 }
