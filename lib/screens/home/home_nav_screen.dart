@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../../constants/colors.dart';
 import '../../constants/constants.dart';
 import '../../constants/text.dart';
@@ -17,6 +16,10 @@ class HomeNavScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Stream<DocumentSnapshot> _analyticsStream =
         firebaseFirestore.collection('analytics').doc('data').snapshots();
+    final Stream<QuerySnapshot> _messageStreams = firebaseFirestore
+        .collection('messages')
+        .orderBy('createdAt', descending: true)
+        .snapshots();
 
     List<String> _analytics = [
       'cv',
@@ -49,9 +52,34 @@ class HomeNavScreen extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Portfolio Visits', style: kBodyTitleTextStyleGrey),
-                SizedBox(height: 6),
-                VisitsCard(count: snapshot.data!.get('visit')),
+                Row(
+                  children: [
+                    Expanded(
+                      child: VisitsCard(
+                          title: 'Portfolio Visits',
+                          count: snapshot.data!.get('visit')),
+                    ),
+                    SizedBox(width: 15),
+                    StreamBuilder<QuerySnapshot>(
+                        stream: _messageStreams,
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Expanded(
+                              child: Center(
+                                  child: LoadingAnimationWidget.stretchedDots(
+                                      color: kPrimaryColor, size: 20)),
+                            );
+                          }
+                          return Expanded(
+                            child: VisitsCard(
+                                title: 'Messages',
+                                count: snapshot.data!.docs.length),
+                          );
+                        }),
+                  ],
+                ),
                 Text('Clicks', style: kBodyTitleTextStyleGrey),
                 SizedBox(height: 6),
                 GridView.builder(

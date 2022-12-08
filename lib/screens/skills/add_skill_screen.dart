@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:portfolio_admin/constants/text.dart';
-import 'package:portfolio_admin/providers/skill/skills.dart';
+import 'package:portfolio_admin/providers/skills.dart';
 import 'package:portfolio_admin/widgets/custom_button.dart';
 import 'package:portfolio_admin/widgets/custom_loading.dart';
 import 'package:portfolio_admin/widgets/custom_text_field.dart';

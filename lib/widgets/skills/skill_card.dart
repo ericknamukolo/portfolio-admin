@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
-import '../../providers/skill/skills.dart';
+import '../../providers/skills.dart';
 
 class SkillCard extends StatelessWidget {
   final Skill skill;
