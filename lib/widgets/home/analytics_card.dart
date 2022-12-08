@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:portfolio_admin/screens/home/notifications_screen.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
@@ -69,41 +70,46 @@ class AnalyticsCard extends StatelessWidget {
       return icon!;
     }
 
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xff000000).withOpacity(0.12),
-            blurRadius: 6.0,
-            offset: const Offset(0.0, 3.0),
-          )
-        ],
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: getIcon(title).color!.withOpacity(.15),
-              shape: BoxShape.circle,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).pushNamed(NotificationsScreen.routeName);
+      },
+      child: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xff000000).withOpacity(0.12),
+              blurRadius: 6.0,
+              offset: const Offset(0.0, 3.0),
+            )
+          ],
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: getIcon(title).color!.withOpacity(.15),
+                shape: BoxShape.circle,
+              ),
+              child: getIcon(title),
+              padding: EdgeInsets.all(8),
             ),
-            child: getIcon(title),
-            padding: EdgeInsets.all(8),
-          ),
-          Text(
-            '$count',
-            style: kBodyTextStyleGrey.copyWith(
-              color: kSecondaryColor,
-              fontWeight: FontWeight.w600,
-              fontSize: 18,
+            Text(
+              '$count',
+              style: kBodyTextStyleGrey.copyWith(
+                color: kSecondaryColor,
+                fontWeight: FontWeight.w600,
+                fontSize: 18,
+              ),
             ),
-          ),
-          Text(getTitle(title),
-              style: kBodyTextStyleGrey.copyWith(fontSize: 11)),
-        ],
+            Text(getTitle(title),
+                style: kBodyTextStyleGrey.copyWith(fontSize: 11)),
+          ],
+        ),
       ),
     );
   }
