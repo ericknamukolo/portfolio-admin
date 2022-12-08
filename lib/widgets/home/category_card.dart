@@ -20,42 +20,42 @@ class CategoryCard extends StatelessWidget {
       if (analyticsTitle == 'cv') {
         icon = Icon(
           Icons.download_rounded,
-          color: kSecondaryColor,
+          color: !noti.isSelected ? kGreyColor : kSecondaryColor,
         );
       } else if (analyticsTitle == 'all') {
         icon = Icon(
           Iconsax.notification5,
-          color: kPrimaryColor,
+          color: !noti.isSelected ? kGreyColor : kPrimaryColor,
         );
       } else if (analyticsTitle == 'fb') {
         icon = Icon(
           MdiIcons.facebook,
-          color: const Color(0xff4267B2),
+          color: !noti.isSelected ? kGreyColor : const Color(0xff4267B2),
         );
       } else if (analyticsTitle == 'github') {
         icon = Icon(
           MdiIcons.github,
-          color: const Color(0xff171515),
+          color: !noti.isSelected ? kGreyColor : const Color(0xff171515),
         );
       } else if (analyticsTitle == 'linkedIn') {
         icon = Icon(
           MdiIcons.linkedin,
-          color: const Color(0xff0A66C2),
+          color: !noti.isSelected ? kGreyColor : const Color(0xff0A66C2),
         );
       } else if (analyticsTitle == 'playStore') {
         icon = Icon(
           MdiIcons.googlePlay,
-          color: const Color(0xff48ff48),
+          color: !noti.isSelected ? kGreyColor : const Color(0xff48ff48),
         );
       } else if (analyticsTitle == 'whatsApp') {
         icon = Icon(
           Icons.whatsapp_rounded,
-          color: const Color(0xff075e54),
+          color: !noti.isSelected ? kGreyColor : const Color(0xff075e54),
         );
       } else {
         icon = Icon(
           Icons.whatsapp_rounded,
-          color: const Color(0xff075e54),
+          color: !noti.isSelected ? kGreyColor : const Color(0xff075e54),
         );
       }
       return icon;
