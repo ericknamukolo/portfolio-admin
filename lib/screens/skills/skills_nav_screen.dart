@@ -1,7 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:portfolio_admin/providers/skill/skills.dart';
+import 'package:portfolio_admin/providers/skills.dart';
 import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
@@ -37,6 +37,13 @@ class _SkillsNavScreenState extends State<SkillsNavScreen> {
       }
     });
     super.initState();
+  }
+
+  @override
+  void setState(VoidCallback fn) {
+    if (mounted) {
+      super.setState(fn);
+    }
   }
 
   @override

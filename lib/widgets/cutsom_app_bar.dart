@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio_admin/screens/home/notifications_screen.dart';
 import '../constants/colors.dart';
 import '../constants/text.dart';
 
@@ -31,6 +32,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? IconButton(
               onPressed: () {
                 if (showNotification) {
+                  Navigator.of(context)
+                      .pushNamed(NotificationsScreen.routeName);
                 } else {
                   Navigator.of(context).pop();
                 }

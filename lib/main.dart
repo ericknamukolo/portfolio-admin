@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:portfolio_admin/firebase_options.dart';
 import 'package:portfolio_admin/generate_route.dart';
-import 'package:portfolio_admin/providers/skill/skills.dart';
+import 'package:portfolio_admin/providers/noti.dart';
+import 'package:portfolio_admin/providers/skills.dart';
 import 'package:portfolio_admin/services/push_notification.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -71,6 +72,7 @@ class AdminPortfolio extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => Skills()),
+        ChangeNotifierProvider(create: (context) => Noti()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
