@@ -1,5 +1,6 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
+import 'package:portfolio_admin/models/category.dart';
 import 'package:portfolio_admin/models/noti_obj.dart';
 
 import '../constants/constants.dart';
@@ -30,6 +31,23 @@ class Noti with ChangeNotifier {
     } catch (e) {
       throw e;
     }
+    notifyListeners();
+  }
+
+  List<NotiCategory> categories = [
+    NotiCategory(name: 'All', isSelected: true),
+    NotiCategory(name: 'cv'),
+    NotiCategory(name: 'github'),
+    NotiCategory(name: 'linkedIn'),
+    NotiCategory(name: 'playStore'),
+    NotiCategory(name: 'whatsApp'),
+  ];
+
+  void selectCard(NotiCategory noti) {
+    categories.forEach((cate) {
+      cate.isSelected = false;
+    });
+    noti.isSelected = !noti.isSelected;
     notifyListeners();
   }
 }
