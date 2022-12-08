@@ -4,6 +4,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:portfolio_admin/constants/text.dart';
 import 'package:portfolio_admin/providers/noti.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
+import 'package:portfolio_admin/widgets/home/notification_card.dart';
 import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
 import '../../widgets/custom_toast.dart';
@@ -55,22 +56,35 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   color: kPrimaryColor, size: 50.0),
             )
           : Consumer<Noti>(
-              builder: (context, data, __) => Container(
-                child: Column(
-                  children: [
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 0),
-                        child: Row(
-                          children: data.categories
-                              .map((noti) => CategoryCard(noti: noti))
-                              .toList(),
+              builder: (context, data, __) => SingleChildScrollView(
+                child: Container(
+                  child: Column(
+                    children: [
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 0),
+                          child: Row(
+                            children: data.categories
+                                .map((noti) => CategoryCard(noti: noti))
+                                .toList(),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      ListView.separated(
+                        padding: EdgeInsets.only(bottom: 15.0),
+                        separatorBuilder: (context, index) => Divider(),
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: ((context, index) {
+                          return NotificationCard(
+                              notification: data.notifications[index]);
+                        }),
+                        itemCount: data.notifications.length,
+                        shrinkWrap: true,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

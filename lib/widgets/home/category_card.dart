@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:portfolio_admin/models/category.dart';
 import 'package:provider/provider.dart';
-
 import '../../constants/colors.dart';
-import '../../constants/text.dart';
 import '../../providers/noti.dart';
 
 class CategoryCard extends StatelessWidget {
@@ -21,6 +20,11 @@ class CategoryCard extends StatelessWidget {
       if (analyticsTitle == 'cv') {
         icon = Icon(
           Icons.download_rounded,
+          color: kSecondaryColor,
+        );
+      } else if (analyticsTitle == 'all') {
+        icon = Icon(
+          Iconsax.notification5,
           color: kPrimaryColor,
         );
       } else if (analyticsTitle == 'fb') {

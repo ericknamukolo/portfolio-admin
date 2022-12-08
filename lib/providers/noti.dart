@@ -34,10 +34,18 @@ class Noti with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> deleteNotification(String id) async {
+    await adminRef.child('notifications').child(id).remove();
+    NotiObj selectedNoti = _notifications.firstWhere((noti) => noti.id == id);
+    _notifications.remove(selectedNoti);
+    notifyListeners();
+  }
+
   List<NotiCategory> categories = [
-    NotiCategory(name: 'All', isSelected: true),
+    NotiCategory(name: 'all', isSelected: true),
     NotiCategory(name: 'cv'),
     NotiCategory(name: 'github'),
+    NotiCategory(name: 'fb'),
     NotiCategory(name: 'linkedIn'),
     NotiCategory(name: 'playStore'),
     NotiCategory(name: 'whatsApp'),
