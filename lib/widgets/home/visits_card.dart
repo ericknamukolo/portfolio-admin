@@ -69,7 +69,6 @@ class VisitsCard extends StatelessWidget {
                   fontSize: 24,
                 ),
               ),
-              //Text(title, style: kBodyTextStyleGrey.copyWith(fontSize: 11)),
             ],
           ),
         ),

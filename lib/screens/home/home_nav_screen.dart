@@ -82,7 +82,9 @@ class HomeNavScreen extends StatelessWidget {
                           }),
                     ],
                   ),
-                  Text('Clicks', style: kBodyTitleTextStyleGrey),
+                  Align(
+                      child: Text('Clicks', style: kBodyTitleTextStyleGrey),
+                      alignment: Alignment.center),
                   SizedBox(height: 6),
                   GridView.builder(
                     physics: const NeverScrollableScrollPhysics(),
