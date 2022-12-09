@@ -77,6 +77,8 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         separatorBuilder: (context, index) => Divider(),
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: ((context, index) {
+                          data.notifications
+                              .sort((a, b) => b.date.compareTo(a.date));
                           return NotificationCard(
                               notification: data.notifications[index]);
                         }),
