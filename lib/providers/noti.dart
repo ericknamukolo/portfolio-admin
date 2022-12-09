@@ -1,9 +1,11 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:portfolio_admin/models/category.dart';
 import 'package:portfolio_admin/models/noti_obj.dart';
 
 import '../constants/constants.dart';
+import '../widgets/custom_toast.dart';
 
 class Noti with ChangeNotifier {
   List<NotiObj> _notifications = [];
@@ -44,6 +46,10 @@ class Noti with ChangeNotifier {
     await adminRef.child('notifications').child(id).remove();
     NotiObj selectedNoti = _notifications.firstWhere((noti) => noti.id == id);
     _notifications.remove(selectedNoti);
+    BotToast.showCustomNotification(
+        duration: Duration(seconds: 5),
+        toastBuilder: (context) =>
+            CustomToast(message: 'Notification deleted', type: 'success'));
     notifyListeners();
   }
 
