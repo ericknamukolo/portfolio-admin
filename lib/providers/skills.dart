@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:portfolio_admin/constants/constants.dart';
 import 'package:portfolio_admin/models/skill.dart';
+
+import '../widgets/custom_toast.dart';
 
 class Skills with ChangeNotifier {
   List<Skill> _skills = [];
@@ -60,7 +63,14 @@ class Skills with ChangeNotifier {
 
   Future<void> toggleVisibility(String id, bool state) async {
     await adminRef.child('skills').child(id).update({'hidden': !state});
-    _skills.firstWhere((skill) => skill.id == id).isHidden = !state;
+    Skill selectedSkill = _skills.firstWhere((skill) => skill.id == id);
+    selectedSkill.isHidden = !state;
+    BotToast.showCustomNotification(
+        duration: Duration(seconds: 5),
+        toastBuilder: (context) => CustomToast(
+            message:
+                '${selectedSkill.name} is now ${state ? 'visible' : 'hidden'}',
+            type: 'success'));
     notifyListeners();
   }
 
