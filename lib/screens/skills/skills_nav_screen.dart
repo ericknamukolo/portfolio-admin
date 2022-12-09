@@ -89,6 +89,7 @@ class _SkillsNavScreenState extends State<SkillsNavScreen> {
                       separatorBuilder: (context, index) => Divider(),
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: ((context, index) {
+                        skills.skills.sort((a, b) => b.date.compareTo(a.date));
                         return SkillCard(skill: skills.skills[index]);
                       }),
                       itemCount: skills.skills.length,
