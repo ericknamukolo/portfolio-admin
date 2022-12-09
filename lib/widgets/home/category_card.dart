@@ -27,6 +27,11 @@ class CategoryCard extends StatelessWidget {
           Iconsax.notification5,
           color: !noti.isSelected ? kGreyColor : kPrimaryColor,
         );
+      } else if (analyticsTitle == 'visit') {
+        icon = Icon(
+          Iconsax.favorite_chart5,
+          color: !noti.isSelected ? kGreyColor : Colors.teal,
+        );
       } else if (analyticsTitle == 'fb') {
         icon = Icon(
           MdiIcons.facebook,

@@ -5,10 +5,8 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'package:portfolio_admin/models/noti_obj.dart';
 import 'package:portfolio_admin/providers/noti.dart';
 import 'package:provider/provider.dart';
-
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
-import '../../providers/skills.dart';
 
 class NotificationCard extends StatelessWidget {
   final NotiObj notification;
@@ -21,7 +19,7 @@ class NotificationCard extends StatelessWidget {
       if (analyticsTitle == 'cv') {
         icon = Icons.download_rounded;
       } else if (analyticsTitle == 'visit') {
-        icon = Iconsax.favorite_chart4;
+        icon = Iconsax.favorite_chart5;
       } else if (analyticsTitle == 'fb') {
         icon = MdiIcons.facebook;
       } else if (analyticsTitle == 'github') {

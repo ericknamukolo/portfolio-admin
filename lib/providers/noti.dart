@@ -7,12 +7,18 @@ import '../constants/constants.dart';
 
 class Noti with ChangeNotifier {
   List<NotiObj> _notifications = [];
+  List<NotiObj> _loadedNotifications = [];
   List<NotiObj> get notifications => _notifications;
   Future<void> fetchNotifications() async {
     try {
+      _loadedNotifications.clear();
+
+      categories.forEach((cate) {
+        cate.isSelected = false;
+      });
+      categories.first.isSelected = true;
       DatabaseEvent ref = await adminRef.child('notifications').once();
       var data = (ref.snapshot.value as Map);
-      List<NotiObj> _loadedNotifications = [];
 
       logger.i(data);
 
@@ -43,6 +49,7 @@ class Noti with ChangeNotifier {
 
   List<NotiCategory> categories = [
     NotiCategory(name: 'all', isSelected: true),
+    NotiCategory(name: 'visit'),
     NotiCategory(name: 'cv'),
     NotiCategory(name: 'github'),
     NotiCategory(name: 'fb'),
@@ -56,6 +63,14 @@ class Noti with ChangeNotifier {
       cate.isSelected = false;
     });
     noti.isSelected = !noti.isSelected;
+    if (noti.name != 'all') {
+      _notifications = _loadedNotifications
+          .where((element) => noti.name == element.category)
+          .toList();
+    } else {
+      _notifications = _loadedNotifications;
+    }
+
     notifyListeners();
   }
 }
