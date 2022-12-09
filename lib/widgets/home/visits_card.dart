@@ -18,13 +18,16 @@ class VisitsCard extends StatelessWidget {
       IconData icon;
       if (titleData == 'Messages') {
         icon = Iconsax.message5;
-      } else {
+      } else if (titleData == 'Portfolio Visits') {
         icon = Iconsax.favorite_chart5;
+      } else {
+        icon = Icons.work_rounded;
       }
       return icon;
     }
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(title, style: kBodyTitleTextStyleGrey),
         SizedBox(height: 6),
@@ -59,14 +62,13 @@ class VisitsCard extends StatelessWidget {
                 padding: EdgeInsets.all(8),
               ),
               Text(
-                '+$count',
+                count.toString(),
                 style: kBodyTextStyleGrey.copyWith(
                   color: kSecondaryColor,
                   fontWeight: FontWeight.w600,
                   fontSize: 24,
                 ),
               ),
-              Text(title, style: kBodyTextStyleGrey.copyWith(fontSize: 11)),
             ],
           ),
         ),
