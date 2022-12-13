@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:portfolio_admin/constants/constants.dart';
 import 'package:portfolio_admin/models/noti_obj.dart';
 import 'package:portfolio_admin/providers/noti.dart';
 import 'package:provider/provider.dart';
@@ -70,7 +69,7 @@ class NotificationCard extends StatelessWidget {
 
     return Container(
       padding: EdgeInsets.all(10),
-      margin: EdgeInsets.symmetric(horizontal: 15),
+      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 7.5),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
@@ -133,8 +132,7 @@ class NotificationCard extends StatelessWidget {
                   color: kSuccessColor,
                 ),
               ),
-              Text(
-                  '${DateFormat.yMMMEd().format(notification.date)} at ${DateFormat.Hm().format(notification.date)}',
+              Text('at ${DateFormat.Hm().format(notification.date)}',
                   style: kBodyTextStyleGrey.copyWith(fontSize: 9)),
             ],
           ),

@@ -1,12 +1,15 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:portfolio_admin/constants/text.dart';
 import 'package:portfolio_admin/providers/noti.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 import 'package:portfolio_admin/widgets/home/notification_card.dart';
 import 'package:provider/provider.dart';
+import 'package:sticky_grouped_list/sticky_grouped_list.dart';
 import '../../constants/colors.dart';
+import '../../models/noti_obj.dart';
 import '../../widgets/custom_toast.dart';
 import '../../widgets/home/category_card.dart';
 
@@ -72,24 +75,61 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           ),
                         ),
                       ),
-                      ListView.separated(
-                        padding: EdgeInsets.only(bottom: 15.0),
-                        separatorBuilder: (context, index) => Divider(),
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: ((context, index) {
-                          data.notifications
-                              .sort((a, b) => b.date.compareTo(a.date));
-                          return NotificationCard(
-                              notification: data.notifications[index]);
-                        }),
-                        itemCount: data.notifications.length,
+                      // ListView.separated(
+                      //   padding: EdgeInsets.only(bottom: 15.0),
+                      //   separatorBuilder: (context, index) => Divider(),
+                      //   physics: const NeverScrollableScrollPhysics(),
+                      //   itemBuilder: ((context, index) {
+                      //     data.notifications
+                      //         .sort((a, b) => b.date.compareTo(a.date));
+                      //     return NotificationCard(
+                      //         notification: data.notifications[index]);
+                      //   }),
+                      //   itemCount: data.notifications.length,
+                      //   shrinkWrap: true,
+                      // ),
+
+                      StickyGroupedListView<NotiObj, DateTime>(
+                        elements: data.notifications,
+                        order: StickyGroupedListOrder.ASC,
+                        groupBy: (element) => DateTime(
+                          element.date.year,
+                          element.date.month,
+                          element.date.day,
+                        ),
+                        groupSeparatorBuilder: ((element) => getDate(element)),
+                        itemComparator: (a, b) => b.date.compareTo(a.date),
+                        itemBuilder: ((context, element) =>
+                            NotificationCard(notification: element)),
                         shrinkWrap: true,
+                        floatingHeader: true,
                       ),
                     ],
                   ),
                 ),
               ),
             ),
+    );
+  }
+
+  Container getDate(NotiObj notiObj) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: kSecondaryColor,
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xff000000).withOpacity(0.12),
+            blurRadius: 6.0,
+            offset: const Offset(0.0, 3.0),
+          )
+        ],
+        borderRadius: BorderRadius.circular(40.0),
+      ),
+      child: Text(
+        '${DateFormat.yMMMEd().format(notiObj.date)}',
+        style: kBodyTextStyleWhite,
+      ),
     );
   }
 }
