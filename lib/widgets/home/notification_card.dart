@@ -36,6 +36,28 @@ class NotificationCard extends StatelessWidget {
       return icon;
     }
 
+    String getDeviceModel(String deviceData) {
+      String modelData = deviceData.split('(')[1];
+      String model = '';
+      if (deviceData == 'no data') {
+        return model;
+      }
+      if (modelData.contains('Linux')) {
+        String version = modelData.split(';')[1];
+        String dev = modelData.split(';')[2].split(')')[0];
+        model = '$dev, $version';
+      } else if (modelData.contains('Windows')) {
+        String os = modelData.split(';')[0];
+        String bits = modelData.split(';')[1];
+        model = '$os, $bits';
+      } else if (modelData.contains('iPhone')) {
+        model = modelData.split(';')[0];
+      } else {
+        model = 'Unkown';
+      }
+      return model;
+    }
+
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.symmetric(horizontal: 15),
@@ -55,7 +77,7 @@ class NotificationCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                   margin: EdgeInsets.only(right: 6),
@@ -67,18 +89,14 @@ class NotificationCard extends StatelessWidget {
                   Text(notification.title, style: kBodyTitleTextStyleGrey),
                 ],
               ),
+              Container(
+                margin: const EdgeInsets.only(left: 6.0),
+                padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                child: SelectableText(getDeviceModel(notification.device),
+                    style: kBodyTextStyleWhite.copyWith(fontSize: 10)),
+                color: kSecondaryColor,
+              ),
               const Spacer(),
-              // GestureDetector(
-              //   onTap: () async {
-              //     await Provider.of<Skills>(context, listen: false)
-              //         .toggleVisibility(skill.id, skill.isHidden);
-              //   },
-              //   child: Icon(
-              //     skill.isHidden ? Iconsax.eye_slash5 : Iconsax.eye4,
-              //     color: skill.isHidden ? kGreyColor : kPrimaryColor,
-              //   ),
-              // ),
-
               GestureDetector(
                 onLongPress: () async {
                   await Provider.of<Noti>(context, listen: false)
