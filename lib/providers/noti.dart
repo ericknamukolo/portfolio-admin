@@ -29,7 +29,7 @@ class Noti with ChangeNotifier {
             title: notiData['title'],
             body: notiData['body'],
             category: notiData['category'],
-            device: notiData['device_info'],
+            device: notiData['device_info'] ?? 'no data',
           ),
         );
       });

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:portfolio_admin/constants/constants.dart';
 import 'package:portfolio_admin/models/noti_obj.dart';
 import 'package:portfolio_admin/providers/noti.dart';
 import 'package:provider/provider.dart';
@@ -40,6 +39,9 @@ class NotificationCard extends StatelessWidget {
     String getDeviceModel(String deviceData) {
       String modelData = deviceData.split('(')[1];
       String model = '';
+      if (deviceData == 'no data') {
+        return model;
+      }
       if (modelData.contains('Linux')) {
         String version = modelData.split(';')[1];
         String dev = modelData.split(';')[2].split(')')[0];
@@ -90,7 +92,7 @@ class NotificationCard extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(left: 6.0),
                 padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                child: Text(getDeviceModel(notification.device),
+                child: SelectableText(getDeviceModel(notification.device),
                     style: kBodyTextStyleWhite.copyWith(fontSize: 10)),
                 color: kSecondaryColor,
               ),
