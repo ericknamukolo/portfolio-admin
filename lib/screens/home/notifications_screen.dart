@@ -91,7 +91,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
                       StickyGroupedListView<NotiObj, DateTime>(
                         elements: data.notifications,
-                        order: StickyGroupedListOrder.ASC,
+                        order: StickyGroupedListOrder.DESC,
                         groupBy: (element) => DateTime(
                           element.date.year,
                           element.date.month,
