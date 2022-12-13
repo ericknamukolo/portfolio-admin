@@ -21,9 +21,6 @@ class Noti with ChangeNotifier {
       categories.first.isSelected = true;
       DatabaseEvent ref = await adminRef.child('notifications').once();
       var data = (ref.snapshot.value as Map);
-
-      logger.i(data);
-
       data.forEach((key, notiData) {
         _loadedNotifications.add(
           NotiObj(
@@ -32,6 +29,7 @@ class Noti with ChangeNotifier {
             title: notiData['title'],
             body: notiData['body'],
             category: notiData['category'],
+            device: notiData['device_info'],
           ),
         );
       });

@@ -3,6 +3,7 @@ class NotiObj {
   String title;
   String body;
   String category;
+  String device;
   DateTime date;
 
   NotiObj({
@@ -11,5 +12,6 @@ class NotiObj {
     required this.body,
     required this.category,
     required this.date,
+    required this.device,
   });
 }

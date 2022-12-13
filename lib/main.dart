@@ -82,7 +82,7 @@ class AdminPortfolio extends StatelessWidget {
         ),
         builder: BotToastInit(),
         navigatorObservers: [
-          BotToastNavigatorObserver(),
+          BotToastNavigatorObserver()
         ],
         onGenerateRoute: generateRoute,
         navigatorKey: navigatorKey,
