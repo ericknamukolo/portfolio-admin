@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:portfolio_admin/constants/constants.dart';
 import 'package:portfolio_admin/models/noti_obj.dart';
 import 'package:portfolio_admin/providers/noti.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +39,12 @@ class NotificationCard extends StatelessWidget {
 
     String getBrowserInfo(String deviceData) {
       String browserData = '';
-      // deviceData.split('(KHTML, like Gecko)')[1].split(' ')[1];
+      try {
+        browserData = deviceData.split('(KHTML, like Gecko)')[1].split(' ')[1];
+      } catch (e) {
+        browserData = 'Linux Browser, Maybe';
+      }
+
       return browserData;
     }
 
