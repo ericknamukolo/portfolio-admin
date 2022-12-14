@@ -74,7 +74,7 @@ class Noti with ChangeNotifier {
     } else {
       _notifications = _loadedNotifications;
     }
-
+    logger.i(notifications);
     notifyListeners();
   }
 }

@@ -59,37 +59,37 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   color: kPrimaryColor, size: 50.0),
             )
           : Consumer<Noti>(
-              builder: (context, data, __) => SingleChildScrollView(
-                child: Container(
-                  child: Column(
-                    children: [
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 0),
-                          child: Row(
-                            children: data.categories
-                                .map((noti) => CategoryCard(noti: noti))
-                                .toList(),
-                          ),
+              builder: (context, data, __) => Container(
+                child: Column(
+                  children: [
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 0),
+                        child: Row(
+                          children: data.categories
+                              .map((noti) => CategoryCard(noti: noti))
+                              .toList(),
                         ),
                       ),
-                      // ListView.separated(
-                      //   padding: EdgeInsets.only(bottom: 15.0),
-                      //   separatorBuilder: (context, index) => Divider(),
-                      //   physics: const NeverScrollableScrollPhysics(),
-                      //   itemBuilder: ((context, index) {
-                      //     data.notifications
-                      //         .sort((a, b) => b.date.compareTo(a.date));
-                      //     return NotificationCard(
-                      //         notification: data.notifications[index]);
-                      //   }),
-                      //   itemCount: data.notifications.length,
-                      //   shrinkWrap: true,
-                      // ),
+                    ),
+                    // ListView.separated(
+                    //   padding: EdgeInsets.only(bottom: 15.0),
+                    //   separatorBuilder: (context, index) => Divider(),
+                    //   physics: const NeverScrollableScrollPhysics(),
+                    //   itemBuilder: ((context, index) {
+                    //     data.notifications
+                    //         .sort((a, b) => b.date.compareTo(a.date));
+                    //     return NotificationCard(
+                    //         notification: data.notifications[index]);
+                    //   }),
+                    //   itemCount: data.notifications.length,
+                    //   shrinkWrap: true,
+                    // ),
 
-                      StickyGroupedListView<NotiObj, DateTime>(
+                    Expanded(
+                      child: StickyGroupedListView<NotiObj, DateTime>(
                         elements: data.notifications,
                         order: StickyGroupedListOrder.DESC,
                         groupBy: (element) => DateTime(
@@ -98,14 +98,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           element.date.day,
                         ),
                         groupSeparatorBuilder: ((element) => getDate(element)),
-                        itemComparator: (a, b) => b.date.compareTo(a.date),
+                        itemComparator: (a, b) => a.date.compareTo(b.date),
                         itemBuilder: ((context, element) =>
                             NotificationCard(notification: element)),
                         shrinkWrap: true,
                         floatingHeader: true,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -114,7 +114,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
 
   Container getDate(NotiObj notiObj) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(horizontal: 100, vertical: 10),
+      height: 40,
       decoration: BoxDecoration(
         color: kSecondaryColor,
         boxShadow: [
@@ -126,6 +128,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         ],
         borderRadius: BorderRadius.circular(40.0),
       ),
+      alignment: Alignment.center,
       child: Text(
         '${DateFormat.yMMMEd().format(notiObj.date)}',
         style: kBodyTextStyleWhite,
