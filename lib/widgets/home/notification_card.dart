@@ -37,8 +37,8 @@ class NotificationCard extends StatelessWidget {
     }
 
     String getBrowserInfo(String deviceData) {
-      String browserData =
-          deviceData.split('(KHTML, like Gecko)')[1].split(' ')[1];
+      String browserData = '';
+      // deviceData.split('(KHTML, like Gecko)')[1].split(' ')[1];
       return browserData;
     }
 
@@ -132,7 +132,7 @@ class NotificationCard extends StatelessWidget {
                   color: kSuccessColor,
                 ),
               ),
-              Text('at ${DateFormat.Hm().format(notification.date)}',
+              Text('at ${DateFormat.Hm().format(notification.date)} hrs',
                   style: kBodyTextStyleGrey.copyWith(fontSize: 9)),
             ],
           ),
