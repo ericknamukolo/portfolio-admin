@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:portfolio_admin/screens/home/experience_screen.dart';
 import 'package:portfolio_admin/screens/home/notifications_screen.dart';
 import 'package:portfolio_admin/screens/nav_bar.dart';
 import 'package:portfolio_admin/screens/sign_in_screen.dart';
@@ -22,6 +23,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case NotificationsScreen.routeName:
       return CupertinoPageRoute(
           builder: (_) => const NotificationsScreen(), settings: settings);
+    case ExperienceScreen.routeName:
+      return CupertinoPageRoute(
+          builder: (_) => const ExperienceScreen(), settings: settings);
   }
   return CupertinoPageRoute(
       builder: (_) => const SplashScreen(), settings: settings);
