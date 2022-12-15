@@ -1,5 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:portfolio_admin/constants/text.dart';
@@ -23,6 +24,8 @@ class NotificationsScreen extends StatefulWidget {
 
 class _NotificationsScreenState extends State<NotificationsScreen> {
   bool _isLoading = true;
+  final GroupedItemScrollController itemScrollController =
+      GroupedItemScrollController();
 
   @override
   void initState() {
@@ -52,6 +55,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: kSecondaryColor,
+        onPressed: () {
+          itemScrollController.scrollTo(
+            index: 0,
+            duration: Duration(seconds: 1),
+          );
+        },
+        child: Icon(
+          Iconsax.arrow_up_24,
+          color: Colors.white,
+        ),
+      ),
       appBar: CustomAppBar(title: 'Notifications', showLeading: true),
       body: _isLoading
           ? Center(
@@ -74,22 +90,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         ),
                       ),
                     ),
-                    // ListView.separated(
-                    //   padding: EdgeInsets.only(bottom: 15.0),
-                    //   separatorBuilder: (context, index) => Divider(),
-                    //   physics: const NeverScrollableScrollPhysics(),
-                    //   itemBuilder: ((context, index) {
-                    //     data.notifications
-                    //         .sort((a, b) => b.date.compareTo(a.date));
-                    //     return NotificationCard(
-                    //         notification: data.notifications[index]);
-                    //   }),
-                    //   itemCount: data.notifications.length,
-                    //   shrinkWrap: true,
-                    // ),
-
                     Expanded(
                       child: StickyGroupedListView<NotiObj, DateTime>(
+                        itemScrollController: itemScrollController,
                         elements: data.notifications,
                         order: StickyGroupedListOrder.DESC,
                         groupBy: (element) => DateTime(
