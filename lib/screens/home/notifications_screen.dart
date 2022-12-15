@@ -60,6 +60,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         onPressed: () {
           itemScrollController.scrollTo(
             index: 0,
+            curve: Curves.easeOut,
             duration: Duration(seconds: 1),
           );
         },
