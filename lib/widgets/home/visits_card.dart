@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:portfolio_admin/screens/home/experience_screen.dart';
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
 
@@ -31,45 +32,52 @@ class VisitsCard extends StatelessWidget {
       children: [
         Text(title, style: kBodyTitleTextStyleGrey),
         SizedBox(height: 6),
-        Container(
-          padding: EdgeInsets.all(10),
-          margin: EdgeInsets.only(bottom: 10),
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xff000000).withOpacity(0.12),
-                blurRadius: 6.0,
-                offset: const Offset(0.0, 3.0),
-              )
-            ],
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: kPrimaryColor.withOpacity(.15),
-                  shape: BoxShape.circle,
+        GestureDetector(
+          onTap: () {
+            if (title == 'Manage Work Experience') {
+              Navigator.of(context).pushNamed(ExperienceScreen.routeName);
+            }
+          },
+          child: Container(
+            padding: EdgeInsets.all(10),
+            margin: EdgeInsets.only(bottom: 10),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xff000000).withOpacity(0.12),
+                  blurRadius: 6.0,
+                  offset: const Offset(0.0, 3.0),
+                )
+              ],
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: kPrimaryColor.withOpacity(.15),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    getIcon(title),
+                    color: kPrimaryColor,
+                  ),
+                  margin: const EdgeInsets.symmetric(vertical: 3),
+                  padding: EdgeInsets.all(8),
                 ),
-                child: Icon(
-                  getIcon(title),
-                  color: kPrimaryColor,
+                Text(
+                  count.toString(),
+                  style: kBodyTextStyleGrey.copyWith(
+                    color: kSecondaryColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24,
+                  ),
                 ),
-                margin: const EdgeInsets.symmetric(vertical: 3),
-                padding: EdgeInsets.all(8),
-              ),
-              Text(
-                count.toString(),
-                style: kBodyTextStyleGrey.copyWith(
-                  color: kSecondaryColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 24,
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ],
