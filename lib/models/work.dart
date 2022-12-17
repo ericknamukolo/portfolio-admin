@@ -4,7 +4,7 @@ class Work {
   String country;
   String empType;
   String state;
-  String siteUrl;
+  String? siteUrl;
   String startDate;
   String workDone;
   String? endDate;
@@ -16,7 +16,7 @@ class Work {
     required this.country,
     required this.empType,
     required this.state,
-    required this.siteUrl,
+    this.siteUrl,
     required this.startDate,
     required this.workDone,
     this.endDate,
