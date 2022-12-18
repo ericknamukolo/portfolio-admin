@@ -7,6 +7,7 @@ import 'package:portfolio_admin/providers/noti.dart';
 import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
+import '../../constants/constants.dart';
 
 class NotificationCard extends StatelessWidget {
   final NotiObj notification;
@@ -57,7 +58,12 @@ class NotificationCard extends StatelessWidget {
       }
       if (modelData.contains('Linux')) {
         String version = modelData.split(';')[1];
-        String dev = modelData.split(';')[2].split(')')[0];
+        String dev = '';
+        try {
+          dev = modelData.split(';')[2].split(')')[0];
+        } catch (e) {
+          dev = 'Linux';
+        }
 
         model = '$dev, $version';
       } else if (modelData.contains('Windows')) {
