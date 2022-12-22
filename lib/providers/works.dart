@@ -36,7 +36,6 @@ class Works with ChangeNotifier {
             workDone: workData['work_done'],
             createdDate: workData['created_at'],
             endDate: workData['end_date'],
-            isHidden: workData['is_hidden'],
             siteUrl: workData['site_url'],
             worksHere: workData['works_here'],
           ),
@@ -62,7 +61,6 @@ class Works with ChangeNotifier {
         'end_date': work.endDate,
         'works_here': work.worksHere,
         'work_done': work.workDone,
-        'is_hidden': work.isHidden,
         'created_at': DateTime.now().toIso8601String(),
       };
       await adminRef.child('experience').push().set(dataMap);
