@@ -129,7 +129,7 @@ class WorkCard extends StatelessWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                  '${DateFormat.yMMMEd().format(DateTime.parse(work.createdDate))} at ${DateFormat.Hm().format(DateTime.parse(work.createdDate))}',
+                  '${DateFormat.yMMMEd().format(DateTime.parse(work.startDate))} at ${DateFormat.Hm().format(DateTime.parse(work.startDate))}',
                   style: kBodyTextStyleGrey.copyWith(fontSize: 9)),
             ),
           ],

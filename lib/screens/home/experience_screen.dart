@@ -28,7 +28,7 @@ class _ExperienceScreenState extends State<ExperienceScreen> {
     Future.delayed(Duration.zero).then((_) async {
       setState(() => _isLoading = true);
       try {
-        //     await Provider.of<Skills>(context, listen: false).fetchSkills();
+        await Provider.of<Works>(context, listen: false).fetchWorkData();
 
         setState(() => _isLoading = false);
       } catch (e) {
