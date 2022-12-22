@@ -6,6 +6,7 @@ import 'package:portfolio_admin/constants/text.dart';
 import 'package:portfolio_admin/models/work.dart';
 import 'package:portfolio_admin/providers/works.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_drop_down_button.dart';
@@ -344,35 +345,37 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                   );
                 },
               ),
-              CustomButton(
-                btnText: 'Add Work',
-                isLoading: _isLoading,
-                click: () async {
-                  try {
-                    setState(() => _isLoading = true);
-                    await Works.addWork(
-                      Work(
-                        company: _company.text,
-                        position: _position.text,
-                        country: selectedCountry,
-                        empType: empType[_groupValue],
-                        state: selectedState,
-                        siteUrl: _siteUrl.text.isEmpty ? null : _siteUrl.text,
-                        startDate: startDate!.toIso8601String(),
-                        workDone: _workDone.text,
-                        endDate: endDate?.toIso8601String(),
-                        worksHere: _isCurrentJob,
-                      ),
-                    );
-                    setState(() => _isLoading = false);
-                    Navigator.of(context).pop();
-                  } catch (e) {
-                    BotToast.showCustomNotification(
-                        toastBuilder: (context) =>
-                            CustomToast(message: e.toString(), type: 'error'));
-                    setState(() => _isLoading = false);
-                  }
-                },
+              Consumer<Works>(
+                builder: (context, data, _) => CustomButton(
+                  btnText: 'Add Work',
+                  isLoading: _isLoading,
+                  click: () async {
+                    try {
+                      setState(() => _isLoading = true);
+                      await data.addWork(
+                        Work(
+                          company: _company.text,
+                          position: _position.text,
+                          country: selectedCountry,
+                          empType: empType[_groupValue],
+                          state: selectedState,
+                          siteUrl: _siteUrl.text.isEmpty ? null : _siteUrl.text,
+                          startDate: startDate!.toIso8601String(),
+                          workDone: _workDone.text,
+                          endDate: endDate?.toIso8601String(),
+                          worksHere: _isCurrentJob,
+                        ),
+                      );
+                      setState(() => _isLoading = false);
+                      Navigator.of(context).pop();
+                    } catch (e) {
+                      BotToast.showCustomNotification(
+                          toastBuilder: (context) => CustomToast(
+                              message: e.toString(), type: 'error'));
+                      setState(() => _isLoading = false);
+                    }
+                  },
+                ),
               ),
             ],
           ),

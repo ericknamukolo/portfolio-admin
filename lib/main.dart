@@ -7,6 +7,7 @@ import 'package:portfolio_admin/firebase_options.dart';
 import 'package:portfolio_admin/generate_route.dart';
 import 'package:portfolio_admin/providers/noti.dart';
 import 'package:portfolio_admin/providers/skills.dart';
+import 'package:portfolio_admin/providers/works.dart';
 import 'package:portfolio_admin/services/push_notification.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -73,6 +74,7 @@ class AdminPortfolio extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => Skills()),
         ChangeNotifierProvider(create: (context) => Noti()),
+        ChangeNotifierProvider(create: (context) => Works()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -81,9 +83,7 @@ class AdminPortfolio extends StatelessWidget {
           fontFamily: 'Montserrat',
         ),
         builder: BotToastInit(),
-        navigatorObservers: [
-          BotToastNavigatorObserver()
-        ],
+        navigatorObservers: [BotToastNavigatorObserver()],
         onGenerateRoute: generateRoute,
         navigatorKey: navigatorKey,
       ),

@@ -1,4 +1,5 @@
 class Work {
+  String? id;
   String company;
   String position;
   String country;
@@ -6,9 +7,11 @@ class Work {
   String state;
   String? siteUrl;
   String startDate;
+  String? createdDate;
   String workDone;
   String? endDate;
   bool worksHere;
+  bool isHidden;
 
   Work({
     required this.company,
@@ -16,10 +19,13 @@ class Work {
     required this.country,
     required this.empType,
     required this.state,
+    this.createdDate,
     this.siteUrl,
     required this.startDate,
     required this.workDone,
     this.endDate,
+    this.id,
     this.worksHere = false,
+    this.isHidden = false,
   });
 }
