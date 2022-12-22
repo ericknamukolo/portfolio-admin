@@ -53,6 +53,20 @@ class WorkCard extends StatelessWidget {
                             '${DateFormat.yMMM().format(DateTime.parse(work.startDate))} - ${work.worksHere ? 'Present' : DateFormat.yMMM().format(DateTime.parse(work.startDate))}',
                             style: kBodyTextStyleGrey.copyWith(fontSize: 10.0),
                           ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 5, vertical: 2),
+                            child: Text(work.empType,
+                                style:
+                                    kBodyTextStyleWhite.copyWith(fontSize: 10)),
+                            color: kSecondaryColor,
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 5),
+                      Row(
+                        children: [
                           Icon(Icons.location_pin,
                               color: kPrimaryColor, size: 15),
                           SizedBox(width: 5),
@@ -61,14 +75,6 @@ class WorkCard extends StatelessWidget {
                             style: kBodyTextStyleGrey.copyWith(fontSize: 10.0),
                           ),
                         ],
-                      ),
-                      Container(
-                        margin: const EdgeInsets.symmetric(vertical: 5.0),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5, vertical: 2),
-                        child: Text(work.empType,
-                            style: kBodyTextStyleWhite.copyWith(fontSize: 10)),
-                        color: kSecondaryColor,
                       ),
                     ],
                   ),
@@ -97,7 +103,8 @@ class WorkCard extends StatelessWidget {
                 ),
               ],
             ),
-            //SizedBox(height: 5),
+            Divider(),
+            //   SizedBox(height: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: work.workDone
@@ -129,7 +136,7 @@ class WorkCard extends StatelessWidget {
             Align(
               alignment: Alignment.bottomRight,
               child: Text(
-                  '${DateFormat.yMMMEd().format(DateTime.parse(work.startDate))} at ${DateFormat.Hm().format(DateTime.parse(work.startDate))}',
+                  '${DateFormat.yMMMEd().format(DateTime.parse(work.createdDate!))} at ${DateFormat.Hm().format(DateTime.parse(work.createdDate!))}',
                   style: kBodyTextStyleGrey.copyWith(fontSize: 9)),
             ),
           ],

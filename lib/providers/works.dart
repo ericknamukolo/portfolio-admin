@@ -23,16 +23,22 @@ class Works with ChangeNotifier {
       var data = (ref.snapshot.value as Map);
       List<Work> _loadedWork = [];
       logger.i(data);
-      data.forEach((key, skillData) {
+      data.forEach((key, workData) {
         _loadedWork.add(
           Work(
-            company: 'company',
-            position: 'position',
-            country: 'country',
-            empType: 'empType',
-            state: 'state',
-            startDate: 'startDate',
-            workDone: 'workDone',
+            id: key,
+            company: workData['company'],
+            position: workData['position'],
+            country: workData['country'],
+            empType: workData['emp_type'],
+            state: workData['state'],
+            startDate: workData['start_date'],
+            workDone: workData['work_done'],
+            createdDate: workData['created_at'],
+            endDate: workData['end_date'],
+            isHidden: workData['is_hidden'],
+            siteUrl: workData['site_url'],
+            worksHere: workData['works_here'],
           ),
         );
       });
@@ -43,7 +49,7 @@ class Works with ChangeNotifier {
     notifyListeners();
   }
 
-  static Future<void> addWork(Work work) async {
+  Future<void> addWork(Work work) async {
     try {
       Map<String, dynamic> dataMap = {
         'company': work.company,
@@ -59,8 +65,8 @@ class Works with ChangeNotifier {
         'is_hidden': work.isHidden,
         'created_at': DateTime.now().toIso8601String(),
       };
-
       await adminRef.child('experience').push().set(dataMap);
+      await fetchWorkData();
     } catch (e) {
       throw e;
     }

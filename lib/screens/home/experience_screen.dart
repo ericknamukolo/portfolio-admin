@@ -94,7 +94,8 @@ class _ExperienceScreenState extends State<ExperienceScreen> {
                           children: [
                             Text('Work Experience', style: kTitleTextStyle),
                             SizedBox(height: 5),
-                            Text(2.toString(), style: kTitleTextStyle),
+                            Text(work.work.length.toString(),
+                                style: kTitleTextStyle),
                           ],
                         ),
                       ),
@@ -102,25 +103,11 @@ class _ExperienceScreenState extends State<ExperienceScreen> {
                         separatorBuilder: (context, index) => Divider(),
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: ((context, index) {
-                          // skills.skills
-                          //     .sort((a, b) => a.date.compareTo(b.date));
-                          return WorkCard(
-                            work: Work(
-                              createdDate: DateTime.now().toIso8601String(),
-                              isHidden: false,
-                              company: 'MTN Zambia',
-                              position: 'Accountant',
-                              country: 'Zambia',
-                              empType: 'Full - Time',
-                              state: 'Lusaka',
-                              startDate: DateTime.now().toIso8601String(),
-                              workDone:
-                                  'some stuff#other stuff#even more random stufffbberhgito-0yjh-tjhotht tjt-hnt-0hnth tht0hnth-t0',
-                              worksHere: true,
-                            ),
-                          );
+                          work.work.sort((a, b) =>
+                              a.createdDate!.compareTo(b.createdDate!));
+                          return WorkCard(work: work.work[index]);
                         }),
-                        itemCount: 2,
+                        itemCount: work.work.length,
                         shrinkWrap: true,
                       ),
                     ],

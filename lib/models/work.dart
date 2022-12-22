@@ -1,4 +1,5 @@
 class Work {
+  String? id;
   String company;
   String position;
   String country;
@@ -23,6 +24,7 @@ class Work {
     required this.startDate,
     required this.workDone,
     this.endDate,
+    this.id,
     this.worksHere = false,
     this.isHidden = false,
   });
