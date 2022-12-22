@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:portfolio_admin/models/work.dart';
+import 'package:portfolio_admin/providers/works.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
@@ -79,22 +81,11 @@ class WorkCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                //  const Spacer(),
-                GestureDetector(
-                  onTap: () async {
-                    // await Provider.of<works>(context, listen: false)
-                    //     .toggleVisibility(work.id, work.isHidden);
-                  },
-                  child: Icon(
-                    work.isHidden ? Iconsax.eye_slash5 : Iconsax.eye4,
-                    color: work.isHidden ? kGreyColor : kPrimaryColor,
-                  ),
-                ),
                 SizedBox(width: 20),
                 GestureDetector(
                   onLongPress: () async {
-                    // await Provider.of<works>(context, listen: false)
-                    //     .deletework(work.id);
+                    await Provider.of<Works>(context, listen: false)
+                        .deleteWorkExp(work.id!);
                   },
                   child: Icon(
                     Icons.delete_rounded,

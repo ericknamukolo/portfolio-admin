@@ -71,4 +71,11 @@ class Works with ChangeNotifier {
       throw e;
     }
   }
+
+  Future<void> deleteWorkExp(String id) async {
+    await adminRef.child('experience').child(id).remove();
+    Work selectedWork = _work.firstWhere((work) => work.id == id);
+    work.remove(selectedWork);
+    notifyListeners();
+  }
 }
