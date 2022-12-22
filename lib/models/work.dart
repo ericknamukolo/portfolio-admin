@@ -6,9 +6,11 @@ class Work {
   String state;
   String? siteUrl;
   String startDate;
+  String createdDate;
   String workDone;
   String? endDate;
   bool worksHere;
+  bool isHidden;
 
   Work({
     required this.company,
@@ -16,10 +18,12 @@ class Work {
     required this.country,
     required this.empType,
     required this.state,
+    required this.createdDate,
     this.siteUrl,
     required this.startDate,
     required this.workDone,
     this.endDate,
     this.worksHere = false,
+    this.isHidden = false,
   });
 }

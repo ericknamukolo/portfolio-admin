@@ -352,6 +352,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                     setState(() => _isLoading = true);
                     await Works.addWork(
                       Work(
+                        createdDate: DateTime.now().toIso8601String(),
                         company: _company.text,
                         position: _position.text,
                         country: selectedCountry,
@@ -362,6 +363,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                         workDone: _workDone.text,
                         endDate: endDate?.toIso8601String(),
                         worksHere: _isCurrentJob,
+                        isHidden: false,
                       ),
                     );
                     setState(() => _isLoading = false);
