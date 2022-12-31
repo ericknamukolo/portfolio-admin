@@ -1,5 +1,6 @@
 class Work {
   String? id;
+  bool isHidden;
   String company;
   String position;
   String country;
@@ -25,5 +26,6 @@ class Work {
     this.endDate,
     this.id,
     this.worksHere = false,
+    this.isHidden = false,
   });
 }
