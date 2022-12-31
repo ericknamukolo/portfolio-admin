@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:bot_toast/bot_toast.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import '../constants/constants.dart';
 import '../models/work.dart';
+import '../widgets/custom_toast.dart';
 
 class Works with ChangeNotifier {
   List<Work> _work = [];
@@ -38,6 +40,7 @@ class Works with ChangeNotifier {
             endDate: workData['end_date'],
             siteUrl: workData['site_url'],
             worksHere: workData['works_here'],
+            isHidden: workData['is_hidden'],
           ),
         );
       });
@@ -62,12 +65,26 @@ class Works with ChangeNotifier {
         'works_here': work.worksHere,
         'work_done': work.workDone,
         'created_at': DateTime.now().toIso8601String(),
+        'is_hidden': false,
       };
       await adminRef.child('experience').push().set(dataMap);
       await fetchWorkData();
     } catch (e) {
       throw e;
     }
+  }
+
+  Future<void> toggleVisibility(String id, bool state) async {
+    await adminRef.child('experience').child(id).update({'is_hidden': !state});
+    Work selectedWork = _work.firstWhere((work) => work.id == id);
+    selectedWork.isHidden = !state;
+    BotToast.showCustomNotification(
+        duration: Duration(seconds: 5),
+        toastBuilder: (context) => CustomToast(
+            message:
+                '${selectedWork.company} is now ${state ? 'visible' : 'hidden'}',
+            type: 'success'));
+    notifyListeners();
   }
 
   Future<void> deleteWorkExp(String id) async {
