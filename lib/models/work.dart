@@ -11,7 +11,6 @@ class Work {
   String workDone;
   String? endDate;
   bool worksHere;
-  bool isHidden;
 
   Work({
     required this.company,
@@ -26,6 +25,5 @@ class Work {
     this.endDate,
     this.id,
     this.worksHere = false,
-    this.isHidden = false,
   });
 }
