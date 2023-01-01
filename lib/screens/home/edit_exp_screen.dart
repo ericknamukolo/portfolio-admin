@@ -6,6 +6,7 @@ import 'package:portfolio_admin/constants/text.dart';
 import 'package:portfolio_admin/providers/works.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 import 'package:provider/provider.dart';
+import '../../constants/constants.dart';
 import '../../models/work.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_drop_down_button.dart';
@@ -153,7 +154,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                   click: () async {
                     DateTime? date = await showDatePicker(
                         context: context,
-                        initialDate: DateTime(2020),
+                        initialDate: DateTime.now(),
                         firstDate: DateTime(1950),
                         lastDate: DateTime.now());
                     if (date != null) {
@@ -203,20 +204,21 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                   click: () async {
                     try {
                       setState(() => _isLoading = true);
-                      // await data.addWork(
-                      //   Work(
-                      //     company: _company.text,
-                      //     position: _position.text,
-                      //     country: selectedCountry,
-                      //     empType: empType[_groupValue],
-                      //     state: selectedState,
-                      //     siteUrl: _siteUrl.text.isEmpty ? null : _siteUrl.text,
-                      //     startDate: startDate!.toIso8601String(),
-                      //     workDone: _workDone.text,
-                      //     endDate: endDate?.toIso8601String(),
-                      //     worksHere: _isCurrentJob,
-                      //   ),
-                      // );
+                      await data.updateWork(
+                        Work(
+                          id: widget.work!.id,
+                          company: _company.text,
+                          position: _position.text,
+                          country: _country.text,
+                          empType: empType[_groupValue],
+                          state: _state.text,
+                          siteUrl: _siteUrl.text.isEmpty ? null : _siteUrl.text,
+                          startDate: startDate!.toIso8601String(),
+                          workDone: _workDone.text,
+                          endDate: endDate?.toIso8601String(),
+                          worksHere: _isCurrentJob,
+                        ),
+                      );
                       setState(() => _isLoading = false);
                       Navigator.of(context).pop();
                     } catch (e) {
