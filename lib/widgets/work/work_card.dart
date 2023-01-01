@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
 import 'package:portfolio_admin/models/work.dart';
 import 'package:portfolio_admin/providers/works.dart';
+import 'package:portfolio_admin/screens/home/edit_exp_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/colors.dart';
@@ -94,12 +96,10 @@ class WorkCard extends StatelessWidget {
                 ),
                 SizedBox(width: 20),
                 GestureDetector(
-                  onLongPress: () async {
-                    await Provider.of<Works>(context, listen: false)
-                        .deleteWorkExp(work.id!);
-                  },
+                  onTap: () => Navigator.of(context).push(CupertinoPageRoute(
+                      builder: (context) => EditExperienceScreen(work: work))),
                   child: Icon(
-                    Icons.delete_rounded,
+                    Icons.edit,
                     color: kPrimaryColor,
                   ),
                 ),

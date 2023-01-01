@@ -24,7 +24,7 @@ class Works with ChangeNotifier {
       DatabaseEvent ref = await adminRef.child('experience').once();
       var data = (ref.snapshot.value as Map);
       List<Work> _loadedWork = [];
-      logger.i(data);
+
       data.forEach((key, workData) {
         _loadedWork.add(
           Work(
@@ -72,6 +72,25 @@ class Works with ChangeNotifier {
     } catch (e) {
       throw e;
     }
+  }
+
+  Future<void> updateWork(Work work) async {
+    await adminRef.child('experience').child(work.id!).update({
+      'company': work.company,
+      'position': work.position,
+      'country': work.country,
+      'state': work.state,
+      'emp_type': work.empType,
+      'site_url': work.siteUrl,
+      'start_date': work.startDate,
+      'end_date': work.endDate,
+      'works_here': work.worksHere,
+      'work_done': work.workDone,
+      //'created_at': work.createdDate,
+      // 'is_hidden': work.isHidden,
+    });
+    fetchWorkData();
+    notifyListeners();
   }
 
   Future<void> toggleVisibility(String id, bool state) async {
