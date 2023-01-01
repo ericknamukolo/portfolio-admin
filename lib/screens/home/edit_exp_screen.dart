@@ -70,7 +70,19 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
     return Scaffold(
       floatingActionButton: _isLoading ? CustomLoading() : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      appBar: CustomAppBar(title: 'Add Work', showLeading: true),
+      appBar: CustomAppBar(
+          title: 'Edit Work',
+          showLeading: true,
+          action: IconButton(
+            onPressed: () async {
+              // await Provider.of<Works>(context, listen: false)
+              //     .deleteWorkExp(widget.work!.id!);
+            },
+            icon: Icon(
+              Icons.delete_rounded,
+              color: Colors.white,
+            ),
+          )),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
