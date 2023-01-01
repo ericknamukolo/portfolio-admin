@@ -31,18 +31,28 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
   DateTime? startDate;
   DateTime? endDate;
 
-  final TextEditingController _company = TextEditingController();
-  final TextEditingController _position = TextEditingController();
-  final TextEditingController _siteUrl = TextEditingController();
-  final TextEditingController _workDone = TextEditingController();
-  final TextEditingController _country = TextEditingController();
-  final TextEditingController _state = TextEditingController();
+  TextEditingController _company = TextEditingController();
+  TextEditingController _position = TextEditingController();
+  TextEditingController _siteUrl = TextEditingController();
+  TextEditingController _workDone = TextEditingController();
+  TextEditingController _country = TextEditingController();
+  TextEditingController _state = TextEditingController();
 
   @override
   void initState() {
     //Work DATA
     _isCurrentJob = widget.work!.worksHere;
     _groupValue = widget.work!.empType == 'Part - Time' ? 0 : 1;
+    _company = TextEditingController(text: widget.work!.company);
+    _position = TextEditingController(text: widget.work!.position);
+    _siteUrl = TextEditingController(text: widget.work!.siteUrl);
+    _workDone = TextEditingController(text: widget.work!.workDone);
+    _country = TextEditingController(text: widget.work!.country);
+    _state = TextEditingController(text: widget.work!.state);
+    startDate = DateTime.parse(widget.work!.startDate);
+    endDate = widget.work!.endDate == null
+        ? null
+        : DateTime.parse(widget.work!.endDate!);
     //Work DATA
 
     super.initState();
@@ -100,7 +110,7 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                 click: () async {
                   DateTime? date = await showDatePicker(
                       context: context,
-                      initialDate: DateTime.now(),
+                      initialDate: startDate!,
                       firstDate: DateTime(1950),
                       lastDate: DateTime.now());
                   if (date != null) {

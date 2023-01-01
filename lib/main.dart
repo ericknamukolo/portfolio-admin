@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:portfolio_admin/constants/colors.dart';
 import 'package:portfolio_admin/firebase_options.dart';
 import 'package:portfolio_admin/generate_route.dart';
 import 'package:portfolio_admin/providers/noti.dart';
@@ -80,6 +81,9 @@ class AdminPortfolio extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Erick | Portfolio',
         theme: ThemeData(
+          primaryColor: kPrimaryColor,
+          primaryColorLight: kPrimaryColor,
+          primaryColorDark: kPrimaryColor,
           fontFamily: 'Montserrat',
         ),
         builder: BotToastInit(),
