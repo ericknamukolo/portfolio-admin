@@ -76,8 +76,47 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
           showLeading: true,
           action: IconButton(
             onPressed: () async {
-              // await Provider.of<Works>(context, listen: false)
-              //     .deleteWorkExp(widget.work!.id!);
+              showDialog(
+                context: context,
+                builder: (_) => Dialog(
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Are you sure?', style: kBodyTitleTextStyleGrey),
+                        SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(
+                                child: CustomButton(
+                                    btnText: 'No',
+                                    click: () => Navigator.of(context).pop(),
+                                    color: kGreyColor)),
+                            SizedBox(width: 10),
+                            Expanded(
+                                child: CustomButton(
+                                    btnText: 'Yes',
+                                    click: () async {
+                                      Navigator.of(context).pop();
+                                      await Provider.of<Works>(context,
+                                              listen: false)
+                                          .deleteWorkExp(widget.work!.id!);
+                                      BotToast.showCustomNotification(
+                                          toastBuilder: (context) => CustomToast(
+                                              message:
+                                                  '${_company.text} deleted successfully',
+                                              type: 'error'));
+                                      Navigator.of(context).pop();
+                                    },
+                                    color: kErrorColor)),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
             },
             icon: Icon(
               Icons.delete_rounded,
