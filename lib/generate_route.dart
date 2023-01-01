@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:portfolio_admin/screens/home/add_experience_screen.dart';
+import 'package:portfolio_admin/screens/home/edit_exp_screen.dart';
 import 'package:portfolio_admin/screens/home/experience_screen.dart';
 import 'package:portfolio_admin/screens/home/notifications_screen.dart';
 import 'package:portfolio_admin/screens/nav_bar.dart';
@@ -30,6 +31,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case AddExperienceScreen.routeName:
       return CupertinoPageRoute(
           builder: (_) => const AddExperienceScreen(), settings: settings);
+    case EditExperienceScreen.routeName:
+      return CupertinoPageRoute(
+          builder: (_) => const EditExperienceScreen(), settings: settings);
   }
   return CupertinoPageRoute(
       builder: (_) => const SplashScreen(), settings: settings);
