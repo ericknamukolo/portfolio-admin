@@ -30,6 +30,7 @@ class Noti with ChangeNotifier {
             body: notiData['body'],
             category: notiData['category'],
             device: notiData['device_info'] ?? 'no data',
+            ip: notiData['ip_address'],
           ),
         );
       });
