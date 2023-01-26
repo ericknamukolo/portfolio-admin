@@ -54,12 +54,12 @@ class CategoryCard extends StatelessWidget {
         );
       } else if (analyticsTitle == 'whatsApp') {
         icon = Icon(
-          Icons.whatsapp_rounded,
+          MdiIcons.whatsapp,
           color: !noti.isSelected ? kGreyColor : const Color(0xff075e54),
         );
       } else {
         icon = Icon(
-          Icons.whatsapp_rounded,
+          MdiIcons.whatsapp,
           color: !noti.isSelected ? kGreyColor : const Color(0xff075e54),
         );
       }

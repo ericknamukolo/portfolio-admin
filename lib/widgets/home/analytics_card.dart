@@ -63,7 +63,7 @@ class AnalyticsCard extends StatelessWidget {
         );
       } else if (analyticsTitle == 'whatsApp') {
         icon = Icon(
-          Icons.whatsapp_rounded,
+          MdiIcons.whatsapp,
           color: const Color(0xff075e54),
         );
       }
@@ -103,11 +103,11 @@ class AnalyticsCard extends StatelessWidget {
               style: kBodyTextStyleGrey.copyWith(
                 color: kSecondaryColor,
                 fontWeight: FontWeight.w600,
-                fontSize: 18,
+                fontSize: 16,
               ),
             ),
             Text(getTitle(title),
-                style: kBodyTextStyleGrey.copyWith(fontSize: 11)),
+                style: kBodyTextStyleGrey.copyWith(fontSize: 10)),
           ],
         ),
       ),
