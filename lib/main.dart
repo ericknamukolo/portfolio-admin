@@ -16,7 +16,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'constants/constants.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // PushNotification.goToMessages();
   flutterLocalNotificationsPlugin.show(0, message.notification!.title,
       message.notification!.body, NotificationDetails(android: details));
 }
@@ -81,6 +80,7 @@ class AdminPortfolio extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Erick | Portfolio',
         theme: ThemeData(
+          useMaterial3: true,
           primaryColor: kPrimaryColor,
           primaryColorLight: kPrimaryColor,
           primaryColorDark: kPrimaryColor,

@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
-import '../../constants/constants.dart';
+
 
 class NotificationCard extends StatelessWidget {
   final NotiObj notification;
@@ -32,9 +32,9 @@ class NotificationCard extends StatelessWidget {
       } else if (analyticsTitle == 'playStore') {
         icon = MdiIcons.googlePlay;
       } else if (analyticsTitle == 'whatsApp') {
-        icon = Icons.whatsapp_rounded;
+        icon = MdiIcons.whatsapp;
       } else {
-        icon = Icons.whatsapp_rounded;
+        icon = MdiIcons.whatsapp;
       }
       return icon;
     }

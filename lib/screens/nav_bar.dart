@@ -62,6 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
               onPressed: () {
                 if (_selectedIndex == 2) {
                   Navigator.of(context).pushNamed(AddSkillScreen.routeName);
+                } else if (_selectedIndex == 3) {
+                  Navigator.of(context).pushNamed(AddSkillScreen.routeName);
                 }
               },
               child: Icon(
