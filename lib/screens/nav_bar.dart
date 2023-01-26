@@ -78,7 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
           showLeading: true,
           action: IconButton(
               onPressed: () => Auth.signOut(context: context),
-              icon: Icon(Icons.logout_rounded))),
+              icon: Icon(
+                Icons.logout_rounded,
+                color: Colors.white,
+              ))),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
