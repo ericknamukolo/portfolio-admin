@@ -45,10 +45,8 @@ class Noti with ChangeNotifier {
     await adminRef.child('notifications').child(id).remove();
     NotiObj selectedNoti = _notifications.firstWhere((noti) => noti.id == id);
     _notifications.remove(selectedNoti);
-    BotToast.showCustomNotification(
-        duration: Duration(seconds: 5),
-        toastBuilder: (context) =>
-            CustomToast(message: 'Notification deleted', type: 'success'));
+
+    Toast.showToast(message: 'Notification deleted', type: ToastType.success);
     notifyListeners();
   }
 

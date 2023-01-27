@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../constants/text.dart';
 
+enum ToastType { success, error }
+
 class CustomToast extends StatelessWidget {
   final String message;
-  final String type;
+  final Enum type;
   const CustomToast({
     Key? key,
     required this.message,
@@ -41,9 +43,9 @@ class CustomToast extends StatelessWidget {
             ),
           ),
           Icon(
-            type == 'error' ? Icons.error : Icons.check_circle,
+            type == ToastType.error ? Icons.error : Icons.check_circle,
             size: 20,
-            color: type == 'error' ? kPrimaryColor : kSuccessColor,
+            color: type == ToastType.error ? kErrorColor : kSuccessColor,
           )
         ],
       ),

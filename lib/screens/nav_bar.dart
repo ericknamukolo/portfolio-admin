@@ -8,6 +8,7 @@ import 'package:portfolio_admin/screens/home/home_nav_screen.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 import '../constants/colors.dart';
 import 'messages/message_nav_screen.dart';
+import 'projects/add_project_screen.dart';
 import 'skills/skills_nav_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -63,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 if (_selectedIndex == 2) {
                   Navigator.of(context).pushNamed(AddSkillScreen.routeName);
                 } else if (_selectedIndex == 3) {
-                  Navigator.of(context).pushNamed(AddSkillScreen.routeName);
+                  Navigator.of(context).pushNamed(AddProjectScreen.routeName);
                 }
               },
               child: Icon(

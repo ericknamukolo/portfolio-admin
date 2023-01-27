@@ -14,6 +14,7 @@ import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/colors.dart';
+import '../../constants/constants.dart';
 
 class AddSkillScreen extends StatefulWidget {
   static const routeName = '/add-skill-screen';
@@ -114,9 +115,8 @@ class _AddSkillScreenState extends State<AddSkillScreen> {
                     setState(() => _isLoading = false);
                     Navigator.of(context).pop();
                   } catch (e) {
-                    BotToast.showCustomNotification(
-                        toastBuilder: (context) =>
-                            CustomToast(message: e.toString(), type: 'error'));
+                    Toast.showToast(
+                        message: e.toString(), type: ToastType.error);
                     setState(() => _isLoading = false);
                   }
                 },

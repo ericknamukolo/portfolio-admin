@@ -4,6 +4,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:portfolio_admin/providers/skills.dart';
 import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
+import '../../constants/constants.dart';
 import '../../constants/text.dart';
 import '../../widgets/custom_toast.dart';
 import '../../widgets/skills/skill_card.dart';
@@ -29,10 +30,7 @@ class _SkillsNavScreenState extends State<SkillsNavScreen> {
 
         setState(() => _isLoading = false);
       } catch (e) {
-        BotToast.showCustomNotification(
-            duration: Duration(seconds: 5),
-            toastBuilder: (context) =>
-                CustomToast(message: e.toString(), type: 'error'));
+        Toast.showToast(message: e.toString(), type: ToastType.error);
         setState(() => _isLoading = false);
       }
     });

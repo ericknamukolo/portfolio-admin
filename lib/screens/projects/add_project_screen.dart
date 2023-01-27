@@ -1,32 +1,36 @@
+import 'dart:io';
+
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:portfolio_admin/constants/colors.dart';
+import 'package:portfolio_admin/constants/constants.dart';
 import 'package:portfolio_admin/constants/text.dart';
-import 'package:portfolio_admin/models/work.dart';
-import 'package:portfolio_admin/providers/works.dart';
+import 'package:portfolio_admin/providers/skills.dart';
+import 'package:portfolio_admin/widgets/custom_button.dart';
+import 'package:portfolio_admin/widgets/custom_loading.dart';
+import 'package:portfolio_admin/widgets/custom_text_field.dart';
+import 'package:portfolio_admin/widgets/custom_toast.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 import 'package:provider/provider.dart';
 
-import '../../constants/constants.dart';
-import '../../widgets/custom_button.dart';
+import '../../constants/colors.dart';
+import '../../providers/works.dart';
 import '../../widgets/custom_drop_down_button.dart';
-import '../../widgets/custom_loading.dart';
-import '../../widgets/custom_text_field.dart';
-import '../../widgets/custom_toast.dart';
 
-class AddExperienceScreen extends StatefulWidget {
-  static const routeName = '/add-experience-screen';
-  const AddExperienceScreen({super.key});
+class AddProjectScreen extends StatefulWidget {
+  static const routeName = '/add-project-screen';
+  const AddProjectScreen({super.key});
 
   @override
-  State<AddExperienceScreen> createState() => _AddExperienceScreenState();
+  State<AddProjectScreen> createState() => _AddProjectScreenState();
 }
 
-class _AddExperienceScreenState extends State<AddExperienceScreen> {
+class _AddProjectScreenState extends State<AddProjectScreen> {
   bool _isLoading = false;
   bool _isCurrentJob = false;
-  List<String> empType = ['Part - Time', 'Full - Time'];
+  List<String> appType = ['Mobile', 'Web/Windows'];
   int _groupValue = 0;
 
   String selectedCountry = 'Zambia';
@@ -34,10 +38,8 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
   DateTime? startDate;
   DateTime? endDate;
 
-  final TextEditingController _company = TextEditingController();
-  final TextEditingController _position = TextEditingController();
-  final TextEditingController _siteUrl = TextEditingController();
-  final TextEditingController _workDone = TextEditingController();
+  final TextEditingController _name = TextEditingController();
+  final TextEditingController _des = TextEditingController();
 
   List<dynamic> countries = [];
   List<dynamic> states = [];
@@ -69,7 +71,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
     return Scaffold(
       floatingActionButton: _isLoading ? CustomLoading() : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      appBar: CustomAppBar(title: 'Add Work', showLeading: true),
+      appBar: CustomAppBar(title: 'Add Project', showLeading: true),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -77,28 +79,28 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomTextField(
-                hint: 'Company Name',
-                preIcon: MdiIcons.officeBuilding,
+                hint: 'Project Name',
+                preIcon: MdiIcons.pen,
                 tc: TextCapitalization.words,
-                data: _company,
+                data: _name,
               ),
               CustomTextField(
                 hint: 'Position',
                 preIcon: MdiIcons.briefcase,
                 tc: TextCapitalization.words,
-                data: _position,
+                data: _name,
               ),
               CustomTextField(
                 hint: 'Company Website',
                 preIcon: MdiIcons.web,
                 tc: TextCapitalization.none,
-                data: _siteUrl,
+                data: _name,
               ),
               CustomTextField(
                 hint: 'Work Accomplished (#)',
                 preIcon: MdiIcons.bookOpenPageVariantOutline,
                 tc: TextCapitalization.none,
-                data: _workDone,
+                data: _name,
               ),
               CustomDropDownButton(
                 removeSpace: true,
@@ -151,7 +153,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                   },
                 ),
               ),
-              Text('Employment Type', style: kBodyTextStyleGrey),
+              Text('Application Type', style: kBodyTextStyleGrey),
               Row(
                 children: [
                   Radio(
@@ -160,7 +162,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                     onChanged: (val) => setState(() => _groupValue = val!),
                     activeColor: kPrimaryColor,
                   ),
-                  Text('Part - Time', style: kBodyTextStyleGrey),
+                  Text('Mobile', style: kBodyTextStyleGrey),
                   const SizedBox(width: 10),
                   Radio(
                     value: 1,
@@ -168,7 +170,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                     onChanged: (val) => setState(() => _groupValue = val!),
                     activeColor: kPrimaryColor,
                   ),
-                  Text('Full - Time', style: kBodyTextStyleGrey),
+                  Text('Web/Windows', style: kBodyTextStyleGrey),
                 ],
               ),
               CustomDropDownButton(
@@ -353,20 +355,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                   click: () async {
                     try {
                       setState(() => _isLoading = true);
-                      await data.addWork(
-                        Work(
-                          company: _company.text,
-                          position: _position.text,
-                          country: selectedCountry,
-                          empType: empType[_groupValue],
-                          state: selectedState,
-                          siteUrl: _siteUrl.text.isEmpty ? null : _siteUrl.text,
-                          startDate: startDate!.toIso8601String(),
-                          workDone: _workDone.text,
-                          endDate: endDate?.toIso8601String(),
-                          worksHere: _isCurrentJob,
-                        ),
-                      );
+                      //add function
                       setState(() => _isLoading = false);
                       Navigator.of(context).pop();
                     } catch (e) {
