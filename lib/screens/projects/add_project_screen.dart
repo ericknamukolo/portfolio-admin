@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:portfolio_admin/constants/constants.dart';
 import 'package:portfolio_admin/constants/text.dart';
+import 'package:portfolio_admin/providers/projects.dart';
 import 'package:portfolio_admin/widgets/custom_button.dart';
 import 'package:portfolio_admin/widgets/custom_loading.dart';
 import 'package:portfolio_admin/widgets/custom_text_field.dart';
@@ -10,6 +11,7 @@ import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../constants/colors.dart';
+import '../../models/project.dart';
 import '../../providers/works.dart';
 
 class AddProjectScreen extends StatefulWidget {
@@ -27,7 +29,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
 
   final TextEditingController _name = TextEditingController();
   final TextEditingController _des = TextEditingController();
-  final TextEditingController _googleStore = TextEditingController();
+  final TextEditingController _playStore = TextEditingController();
   final TextEditingController _link = TextEditingController();
   final TextEditingController _github = TextEditingController();
 
@@ -103,7 +105,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                     hint: 'Google Playstore link',
                     preIcon: MdiIcons.googlePlay,
                     tc: TextCapitalization.none,
-                    data: _googleStore,
+                    data: _playStore,
                     suffIcon: IconButton(
                       onPressed: () async {
                         Uri uri = Uri.parse(
@@ -130,14 +132,21 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
               ),
             ),
             const Spacer(),
-            Consumer<Works>(
+            Consumer<Projects>(
               builder: (context, data, _) => CustomButton(
                 btnText: 'Add Project',
                 isLoading: _isLoading,
                 click: () async {
                   try {
                     setState(() => _isLoading = true);
-                    //add function
+                    await data.addProject(Project(
+                      name: _name.text,
+                      des: _des.text,
+                      type: appType[_groupValue],
+                      externalLink: _link.text,
+                      githubLink: _github.text,
+                      googleLink: _playStore.text,
+                    ));
                     setState(() => _isLoading = false);
                     Navigator.of(context).pop();
                   } catch (e) {

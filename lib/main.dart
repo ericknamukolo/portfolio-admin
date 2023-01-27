@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'constants/constants.dart';
+import 'providers/projects.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   flutterLocalNotificationsPlugin.show(0, message.notification!.title,
@@ -75,6 +76,7 @@ class AdminPortfolio extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => Skills()),
         ChangeNotifierProvider(create: (context) => Noti()),
         ChangeNotifierProvider(create: (context) => Works()),
+        ChangeNotifierProvider(create: (context) => Projects()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
