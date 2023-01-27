@@ -8,6 +8,8 @@ import 'package:portfolio_admin/screens/sign_in_screen.dart';
 import 'package:portfolio_admin/screens/skills/add_skill_screen.dart';
 import 'package:portfolio_admin/screens/splash_screen.dart';
 
+import 'screens/projects/add_project_screen.dart';
+
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
@@ -34,6 +36,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case EditExperienceScreen.routeName:
       return CupertinoPageRoute(
           builder: (_) => const EditExperienceScreen(), settings: settings);
+    case AddProjectScreen.routeName:
+      return CupertinoPageRoute(
+          builder: (_) => const AddProjectScreen(), settings: settings);
   }
   return CupertinoPageRoute(
       builder: (_) => const SplashScreen(), settings: settings);

@@ -97,12 +97,10 @@ class Works with ChangeNotifier {
     await adminRef.child('experience').child(id).update({'is_hidden': !state});
     Work selectedWork = _work.firstWhere((work) => work.id == id);
     selectedWork.isHidden = !state;
-    BotToast.showCustomNotification(
-        duration: Duration(seconds: 5),
-        toastBuilder: (context) => CustomToast(
-            message:
-                '${selectedWork.company} is now ${state ? 'visible' : 'hidden'}',
-            type: 'success'));
+    Toast.showToast(
+        message:
+            '${selectedWork.company} is now ${state ? 'visible' : 'hidden'}',
+        type: ToastType.success);
     notifyListeners();
   }
 

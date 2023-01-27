@@ -4,6 +4,7 @@ import 'package:portfolio_admin/models/work.dart';
 import 'package:portfolio_admin/screens/home/add_experience_screen.dart';
 import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
+import '../../constants/constants.dart';
 import '../../constants/text.dart';
 import '../../providers/works.dart';
 import '../../widgets/custom_toast.dart';
@@ -32,10 +33,8 @@ class _ExperienceScreenState extends State<ExperienceScreen> {
 
         setState(() => _isLoading = false);
       } catch (e) {
-        BotToast.showCustomNotification(
-            duration: Duration(seconds: 5),
-            toastBuilder: (context) =>
-                CustomToast(message: e.toString(), type: 'error'));
+       Toast.showToast(
+                          message: e.toString(), type: ToastType.error);
         setState(() => _isLoading = false);
       }
     });

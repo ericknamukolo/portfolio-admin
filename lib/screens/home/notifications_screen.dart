@@ -10,6 +10,7 @@ import 'package:portfolio_admin/widgets/home/notification_card.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_grouped_list/sticky_grouped_list.dart';
 import '../../constants/colors.dart';
+import '../../constants/constants.dart';
 import '../../models/noti_obj.dart';
 import '../../widgets/custom_toast.dart';
 import '../../widgets/home/category_card.dart';
@@ -35,10 +36,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         await Provider.of<Noti>(context, listen: false).fetchNotifications();
         setState(() => _isLoading = false);
       } catch (e) {
-        BotToast.showCustomNotification(
-            duration: Duration(seconds: 5),
-            toastBuilder: (context) =>
-                CustomToast(message: e.toString(), type: 'error'));
+        Toast.showToast(message: e.toString(), type: ToastType.error);
         setState(() => _isLoading = false);
       }
     });

@@ -102,11 +102,11 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                                       await Provider.of<Works>(context,
                                               listen: false)
                                           .deleteWorkExp(widget.work!.id!);
-                                      BotToast.showCustomNotification(
-                                          toastBuilder: (context) => CustomToast(
-                                              message:
-                                                  '${_company.text} deleted successfully',
-                                              type: 'error'));
+
+                                      Toast.showToast(
+                                          message:
+                                              '${_company.text} deleted successfully',
+                                          type: ToastType.error);
                                       Navigator.of(context).pop();
                                     },
                                     color: kErrorColor)),
@@ -261,9 +261,8 @@ class _EditExperienceScreenState extends State<EditExperienceScreen> {
                       setState(() => _isLoading = false);
                       Navigator.of(context).pop();
                     } catch (e) {
-                      BotToast.showCustomNotification(
-                          toastBuilder: (context) => CustomToast(
-                              message: e.toString(), type: 'error'));
+                      Toast.showToast(
+                          message: e.toString(), type: ToastType.error);
                       setState(() => _isLoading = false);
                     }
                   },

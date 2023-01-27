@@ -8,6 +8,7 @@ import 'package:portfolio_admin/providers/works.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 import 'package:provider/provider.dart';
 
+import '../../constants/constants.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_drop_down_button.dart';
 import '../../widgets/custom_loading.dart';
@@ -369,9 +370,8 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                       setState(() => _isLoading = false);
                       Navigator.of(context).pop();
                     } catch (e) {
-                      BotToast.showCustomNotification(
-                          toastBuilder: (context) => CustomToast(
-                              message: e.toString(), type: 'error'));
+                      Toast.showToast(
+                          message: e.toString(), type: ToastType.error);
                       setState(() => _isLoading = false);
                     }
                   },

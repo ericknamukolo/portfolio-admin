@@ -7,6 +7,7 @@ import 'package:portfolio_admin/widgets/custom_loading.dart';
 import 'package:portfolio_admin/widgets/custom_text_field.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 
+import '../constants/constants.dart';
 import '../widgets/custom_toast.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -72,12 +73,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       pwd: _pwd.text.trim(),
                     );
                   } catch (e) {
-                    BotToast.showCustomNotification(
-                        duration: Duration(seconds: 4),
-                        toastBuilder: (context) => CustomToast(
-                              message: e.toString().split(']')[1],
-                              type: 'error',
-                            ));
+                    Toast.showToast(
+                        message: e.toString().split(']')[1],
+                        type: ToastType.error);
                     setState(() => _isLoading = false);
                   }
                 },

@@ -65,12 +65,9 @@ class Skills with ChangeNotifier {
     await adminRef.child('skills').child(id).update({'hidden': !state});
     Skill selectedSkill = _skills.firstWhere((skill) => skill.id == id);
     selectedSkill.isHidden = !state;
-    BotToast.showCustomNotification(
-        duration: Duration(seconds: 5),
-        toastBuilder: (context) => CustomToast(
-            message:
-                '${selectedSkill.name} is now ${state ? 'visible' : 'hidden'}',
-            type: 'success'));
+    Toast.showToast(
+        message: '${selectedSkill.name} is now ${state ? 'visible' : 'hidden'}',
+        type: ToastType.success);
     notifyListeners();
   }
 
