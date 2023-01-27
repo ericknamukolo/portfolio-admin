@@ -81,9 +81,7 @@ class AdminPortfolio extends StatelessWidget {
         title: 'Erick | Portfolio',
         theme: ThemeData(
           useMaterial3: true,
-          primaryColor: kPrimaryColor,
-          primaryColorLight: kPrimaryColor,
-          primaryColorDark: kPrimaryColor,
+          colorScheme: ColorScheme.light(primary: kPrimaryColor),
           fontFamily: 'Montserrat',
         ),
         builder: BotToastInit(),
