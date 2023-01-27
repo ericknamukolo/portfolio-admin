@@ -9,7 +9,7 @@ class CustomTextField extends StatelessWidget {
   final IconButton? suffIcon;
   final bool ac;
   final TextCapitalization tc;
-  final int lines;
+  final int? lines;
 
   final TextInputType? type;
   final bool obs;
@@ -45,6 +45,7 @@ class CustomTextField extends StatelessWidget {
         cursorColor: kPrimaryColor,
         maxLines: lines,
         decoration: InputDecoration(
+          fillColor: Color(0xffF0F0F0),
           prefixStyle: kBodyTextStyleGrey,
           border: InputBorder.none,
           filled: true,
