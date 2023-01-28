@@ -232,6 +232,8 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                       externalLink: _link.text,
                       githubLink: _github.text,
                       googleLink: _playStore.text,
+                      coverImg: _coverImg!,
+                      images: _pickedImages,
                     ));
                     setState(() => _isLoading = false);
                     Navigator.of(context).pop();
