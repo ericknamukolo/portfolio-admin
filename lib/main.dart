@@ -45,7 +45,6 @@ Future<void> main() async {
     criticalAlert: true,
     provisional: false,
   );
-  ;
 
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
