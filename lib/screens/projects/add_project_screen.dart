@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:portfolio_admin/constants/constants.dart';
 import 'package:portfolio_admin/constants/text.dart';
@@ -13,6 +16,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../constants/colors.dart';
 import '../../models/project.dart';
 import '../../providers/works.dart';
+import '../../widgets/projects/image_card.dart';
 
 class AddProjectScreen extends StatefulWidget {
   static const routeName = '/add-project-screen';
@@ -33,11 +37,34 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
   final TextEditingController _link = TextEditingController();
   final TextEditingController _github = TextEditingController();
 
+  final ImagePicker _picker = ImagePicker();
+  File? _coverImg;
+  List<XFile> _pickedImages = [];
+
+  Future<void> getCover() async {
+    XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage == null) return;
+    File imageTemp = File(pickedImage.path);
+    setState(() {
+      _coverImg = imageTemp;
+    });
+  }
+
   @override
   void setState(VoidCallback fn) {
     if (mounted) {
       super.setState(fn);
     }
+  }
+
+  @override
+  void dispose() {
+    _name.dispose();
+    _des.dispose();
+    _playStore.dispose();
+    _link.dispose();
+    _github.dispose();
+    super.dispose();
   }
 
   @override
@@ -84,6 +111,68 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                 Text('Web/Windows', style: kBodyTextStyleGrey),
               ],
             ),
+            Text('Images', style: kBodyTextStyleGrey),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ImageCard(
+                    removeBgColor: _coverImg != null,
+                    click: getCover,
+                    child: _coverImg == null
+                        ? Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.photo_camera_rounded,
+                                  color: kPrimaryColor),
+                              SizedBox(height: 5),
+                              Text(
+                                'Add Cover Image',
+                                style:
+                                    kBodyTextStyleGrey.copyWith(fontSize: 11),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          )
+                        : Image.file(_coverImg!),
+                  ),
+                  SizedBox(width: 10),
+                  Visibility(
+                    visible: _pickedImages.isEmpty,
+                    child: ImageCard(
+                      click: () async {
+                        List<XFile>? pickedImages =
+                            await _picker.pickMultiImage();
+                        setState(() => _pickedImages = pickedImages);
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.photo_camera_rounded,
+                              color: kPrimaryColor),
+                          SizedBox(height: 5),
+                          Text(
+                            'Add More Images',
+                            style: kBodyTextStyleGrey.copyWith(fontSize: 11),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Wrap(
+                      runSpacing: 10.0,
+                      spacing: 10.0,
+                      children: _pickedImages
+                          .map((img) => SmallImageCard(image: img))
+                          .toList(),
+                    ),
+                  ),
+                ],
+              ),
+            ),
             _groupValue == 1
                 ? CustomTextField(
                     hint: 'External link',
@@ -94,7 +183,6 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                       onPressed: () async {
                         Uri uri = Uri.parse(
                             'https://app.netlify.com/teams/ericknamukolo/overview');
-
                         await launchUrl(uri,
                             mode: LaunchMode.externalApplication);
                       },
@@ -110,7 +198,6 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                       onPressed: () async {
                         Uri uri = Uri.parse(
                             'https://play.google.com/store/apps/dev?id=8203990443766365712');
-
                         await launchUrl(uri,
                             mode: LaunchMode.externalApplication);
                       },
@@ -125,7 +212,6 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
               suffIcon: IconButton(
                 onPressed: () async {
                   Uri uri = Uri.parse('https://github.com/ericknamukolo');
-
                   await launchUrl(uri, mode: LaunchMode.externalApplication);
                 },
                 icon: Icon(Icons.link, color: kPrimaryColor),
@@ -146,6 +232,8 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                       externalLink: _link.text,
                       githubLink: _github.text,
                       googleLink: _playStore.text,
+                      coverImg: _coverImg!,
+                      images: _pickedImages,
                     ));
                     setState(() => _isLoading = false);
                     Navigator.of(context).pop();
@@ -160,6 +248,26 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class SmallImageCard extends StatelessWidget {
+  final XFile image;
+  const SmallImageCard({
+    super.key,
+    required this.image,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      width: 50,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      child: Image.file(File(image.path)),
     );
   }
 }
