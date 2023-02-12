@@ -123,6 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Text(
                           '${packageInfo!.appName} v${packageInfo!.version} #${packageInfo!.buildNumber} ${packageInfo!.installerStore ?? ''}',
+                          textAlign: TextAlign.center,
                           style: kBodyTextStyleGrey.copyWith(fontSize: 9)),
                     ],
                   ),
@@ -221,22 +222,22 @@ class _HomeScreenState extends State<HomeScreen> {
               GButton(
                 icon: Iconsax.home5,
                 text: 'Home',
-                onPressed: () => showAd(AdUnits.interTestAd),
+                onPressed: () => showAd(AdUnits.interHomeAd),
               ),
               GButton(
                 icon: Iconsax.message5,
                 text: 'Messages',
-                onPressed: () => showAd(AdUnits.interTestAd),
+                onPressed: () => showAd(AdUnits.interMessageAd),
               ),
               GButton(
                 icon: Iconsax.code_15,
                 text: 'Skills',
-                onPressed: () => showAd(AdUnits.interTestAd),
+                onPressed: () => showAd(AdUnits.interSkillAd),
               ),
               GButton(
                 icon: Iconsax.mobile_programming5,
                 text: 'Projects',
-                onPressed: () => showAd(AdUnits.interTestAd),
+                onPressed: () => showAd(AdUnits.interProjectAd),
               ),
             ],
             selectedIndex: _selectedIndex,
