@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:portfolio_admin/constants/colors.dart';
 import 'package:portfolio_admin/constants/constants.dart';
 import 'package:portfolio_admin/constants/text.dart';
@@ -19,6 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(Duration(seconds: 5), () async {
+      packageInfo = await PackageInfo.fromPlatform();
       Navigator.of(context).pushReplacementNamed(
           firebaseAuth.currentUser == null
               ? SignInScreen.routeName

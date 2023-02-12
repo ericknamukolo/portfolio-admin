@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:logger/logger.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/custom_toast.dart';
@@ -15,6 +16,7 @@ FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
 DatabaseReference adminRef = FirebaseDatabase.instance.ref().child('admin');
+PackageInfo? packageInfo;
 
 SharedPreferences? prefs;
 

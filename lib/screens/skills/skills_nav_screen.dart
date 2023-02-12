@@ -84,7 +84,8 @@ class _SkillsNavScreenState extends State<SkillsNavScreen> {
                       ),
                     ),
                     ListView.separated(
-                      separatorBuilder: (context, index) => Divider(),
+                      separatorBuilder: (context, index) =>
+                          Divider(color: kGreyColor),
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: ((context, index) {
                         skills.skills.sort((a, b) => a.date.compareTo(b.date));

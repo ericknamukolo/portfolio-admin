@@ -1,12 +1,19 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:portfolio_admin/constants/text.dart';
 import 'package:portfolio_admin/providers/auth.dart';
 import 'package:portfolio_admin/screens/skills/add_skill_screen.dart';
 import 'package:portfolio_admin/screens/home/home_nav_screen.dart';
+import 'package:portfolio_admin/widgets/custom_toast.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../constants/ad_units.dart';
 import '../constants/colors.dart';
+import '../constants/constants.dart';
+import '../services/ad_manager.dart';
 import 'messages/message_nav_screen.dart';
 import 'projects/add_project_screen.dart';
 import 'skills/skills_nav_screen.dart';
@@ -47,15 +54,90 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    //   PushNotification.inititialize(context);
     if (widget.newMessageNotifcation) {
       _selectedIndex = 1;
     }
     super.initState();
   }
 
+  void showAd(String adUnit) {
+    AdManager.loadInterstitialAd(adUnit: adUnit);
+  }
+
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> menuItems = [
+      {
+        'name': 'About',
+        'icon': Icons.info_outline_rounded,
+        'tap': () async {
+          Future.delayed(
+            Duration.zero,
+            () => showDialog(
+              context: context,
+              builder: (_) => Dialog(
+                backgroundColor: Colors.transparent,
+                insetPadding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('About App', style: kBodyTextStyleGrey),
+                      SizedBox(height: 5),
+                      Text.rich(
+                        style: kBodyTextStyleGrey.copyWith(fontSize: 11),
+                        textAlign: TextAlign.center,
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                                text:
+                                    'Portfolio Admin app is an app used to manage my '),
+                            TextSpan(
+                              text: 'Portfolio website.',
+                              style: kBodyTextStyleGrey.copyWith(
+                                  color: kPrimaryColor),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => launchUrl(
+                                    Uri.parse('https://ericknamukolo.com'),
+                                    mode: LaunchMode.externalApplication),
+                            ),
+                          ],
+                        ),
+                      ),
+                      TextButton(
+                        child: Text('Privacy Policy',
+                            style: kBodyTextStyleGrey.copyWith(
+                                color: kPrimaryColor)),
+                        onPressed: () async {
+                          await launchUrl(
+                              Uri.parse(
+                                  'https://portfolio-admin-privacy-p0licy.netlify.app'),
+                              mode: LaunchMode.externalApplication);
+                        },
+                      ),
+                      Text(
+                          '${packageInfo!.appName} v${packageInfo!.version} #${packageInfo!.buildNumber} ${packageInfo!.installerStore ?? ''}',
+                          style: kBodyTextStyleGrey.copyWith(fontSize: 9)),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      },
+      {
+        'name': 'Log Out',
+        'icon': Icons.logout_rounded,
+        'tap': () => Auth.signOut(context: context),
+      },
+    ];
     return Scaffold(
       floatingActionButton: _selectedIndex == 2 || _selectedIndex == 3
           ? FloatingActionButton(
@@ -74,15 +156,40 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           : null,
       appBar: CustomAppBar(
-          title: getAppBarName(),
-          showNotification: true,
-          showLeading: true,
-          action: IconButton(
-              onPressed: () => Auth.signOut(context: context),
-              icon: Icon(
-                Icons.logout_rounded,
-                color: Colors.white,
-              ))),
+        title: getAppBarName(),
+        showNotification: true,
+        showLeading: true,
+        action: PopupMenuButton(
+          color: Colors.white,
+          itemBuilder: (_) => menuItems
+              .map(
+                (data) => PopupMenuItem(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+                  height: 25,
+                  child: Row(
+                    children: [
+                      Icon(data['icon'], color: kPrimaryColor, size: 20.0),
+                      SizedBox(width: 10),
+                      Text(
+                        data['name'],
+                        style: kBodyTextStyleGrey,
+                      ),
+                    ],
+                  ),
+                  onTap: data['tap'],
+                ),
+              )
+              .toList(),
+          child: IconButton(
+            onPressed: null,
+            icon: Icon(
+              Iconsax.menu_15,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
       body: _widgetOptions.elementAt(_selectedIndex),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
@@ -114,18 +221,22 @@ class _HomeScreenState extends State<HomeScreen> {
               GButton(
                 icon: Iconsax.home5,
                 text: 'Home',
+                onPressed: () => showAd(AdUnits.interTestAd),
               ),
               GButton(
                 icon: Iconsax.message5,
                 text: 'Messages',
+                onPressed: () => showAd(AdUnits.interTestAd),
               ),
               GButton(
                 icon: Iconsax.code_15,
                 text: 'Skills',
+                onPressed: () => showAd(AdUnits.interTestAd),
               ),
               GButton(
                 icon: Iconsax.mobile_programming5,
                 text: 'Projects',
+                onPressed: () => showAd(AdUnits.interTestAd),
               ),
             ],
             selectedIndex: _selectedIndex,

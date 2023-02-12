@@ -67,7 +67,8 @@ class MessageNavScreen extends StatelessWidget {
                     ),
                   ),
                   ListView.separated(
-                    separatorBuilder: (context, index) => Divider(),
+                    separatorBuilder: (context, index) =>
+                        Divider(color: kGreyColor),
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: ((context, index) {
                       Map messageData = snapshot.data!.docs[index].data()

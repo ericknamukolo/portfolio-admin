@@ -9,12 +9,14 @@ import 'package:portfolio_admin/generate_route.dart';
 import 'package:portfolio_admin/providers/noti.dart';
 import 'package:portfolio_admin/providers/skills.dart';
 import 'package:portfolio_admin/providers/works.dart';
+import 'package:portfolio_admin/services/ad_manager.dart';
 import 'package:portfolio_admin/services/push_notification.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'constants/constants.dart';
 import 'providers/projects.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   flutterLocalNotificationsPlugin.show(0, message.notification!.title,
@@ -29,12 +31,13 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   prefs = await SharedPreferences.getInstance();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Permission.notification.request();
-
+  AdManager.loadAppOpenAd();
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await messaging.requestPermission(
@@ -79,7 +82,7 @@ class AdminPortfolio extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Erick | Portfolio',
+        title: 'Erick | Portfolio Admin',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.light(primary: kPrimaryColor),
