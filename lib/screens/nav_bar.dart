@@ -8,6 +8,7 @@ import 'package:portfolio_admin/screens/skills/add_skill_screen.dart';
 import 'package:portfolio_admin/screens/home/home_nav_screen.dart';
 import 'package:portfolio_admin/widgets/custom_toast.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../constants/ad_units.dart';
 import '../constants/colors.dart';
 import '../constants/constants.dart';
@@ -87,6 +88,25 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text('About App', style: kBodyTextStyleGrey),
+                      SizedBox(height: 5),
+                      Text(
+                          'Portfolio Admin app is an app used to manage my portfolio website.',
+                          textAlign: TextAlign.center,
+                          style: kBodyTextStyleGrey.copyWith(fontSize: 11)),
+                      TextButton(
+                        child: Text('Privacy Policy',
+                            style: kBodyTextStyleGrey.copyWith(
+                                color: kPrimaryColor)),
+                        onPressed: () async {
+                          await launchUrl(
+                              Uri.parse(
+                                  'https://portfolio-admin-privacy-p0licy.netlify.app'),
+                              mode: LaunchMode.externalApplication);
+                        },
+                      ),
+                      Text(
+                          '${packageInfo!.appName} v${packageInfo!.version} #${packageInfo!.buildNumber} ${packageInfo!.installerStore ?? ''}',
+                          style: kBodyTextStyleGrey.copyWith(fontSize: 9)),
                     ],
                   ),
                 ),
