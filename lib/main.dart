@@ -82,7 +82,7 @@ class AdminPortfolio extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Erick | Portfolio',
+        title: 'Erick | Portfolio Admin',
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: ColorScheme.light(primary: kPrimaryColor),

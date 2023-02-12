@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -89,10 +90,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Text('About App', style: kBodyTextStyleGrey),
                       SizedBox(height: 5),
-                      Text(
-                          'Portfolio Admin app is an app used to manage my portfolio website.',
-                          textAlign: TextAlign.center,
-                          style: kBodyTextStyleGrey.copyWith(fontSize: 11)),
+                      Text.rich(
+                        style: kBodyTextStyleGrey.copyWith(fontSize: 11),
+                        textAlign: TextAlign.center,
+                        TextSpan(
+                          children: [
+                            TextSpan(
+                                text:
+                                    'Portfolio Admin app is an app used to manage my '),
+                            TextSpan(
+                              text: 'Portfolio website.',
+                              style: kBodyTextStyleGrey.copyWith(
+                                  color: kPrimaryColor),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => launchUrl(
+                                    Uri.parse('https://ericknamukolo.com'),
+                                    mode: LaunchMode.externalApplication),
+                            ),
+                          ],
+                        ),
+                      ),
                       TextButton(
                         child: Text('Privacy Policy',
                             style: kBodyTextStyleGrey.copyWith(
