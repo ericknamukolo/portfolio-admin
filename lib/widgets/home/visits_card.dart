@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:portfolio_admin/screens/home/experience_screen.dart';
+import '../../constants/ad_units.dart';
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
+import '../../services/ad_manager.dart';
 
 class VisitsCard extends StatelessWidget {
   final int count;
@@ -36,6 +38,8 @@ class VisitsCard extends StatelessWidget {
           onTap: () {
             if (title == 'Manage Work Experience') {
               Navigator.of(context).pushNamed(ExperienceScreen.routeName);
+              Future.delayed(Duration(seconds: 3)).then((_) =>
+                  AdManager.loadInterstitialAd(adUnit: AdUnits.interTestAd));
             }
           },
           child: Container(

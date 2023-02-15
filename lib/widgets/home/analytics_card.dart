@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:portfolio_admin/constants/ad_units.dart';
 import 'package:portfolio_admin/screens/home/notifications_screen.dart';
+import 'package:portfolio_admin/services/ad_manager.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
@@ -73,6 +75,8 @@ class AnalyticsCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.of(context).pushNamed(NotificationsScreen.routeName);
+        Future.delayed(Duration(seconds: 3)).then(
+            (_) => AdManager.loadInterstitialAd(adUnit: AdUnits.interTestAd));
       },
       child: Container(
         padding: EdgeInsets.all(10),
