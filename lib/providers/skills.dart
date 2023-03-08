@@ -38,21 +38,7 @@ class Skills with ChangeNotifier {
     try {
       DatabaseEvent ref = await adminRef.child('skills').once();
       var data = (ref.snapshot.value as Map);
-      List<Skill> _loadedSkills = [];
-
-      data.forEach((key, skillData) {
-        _loadedSkills.add(
-          Skill(
-            date: DateTime.parse(skillData['date']),
-            id: key,
-            des: skillData['des'],
-            iconUrl: skillData['img'],
-            isHidden: skillData['hidden'],
-            name: skillData['name'],
-          ),
-        );
-      });
-      _skills = _loadedSkills;
+      _skills = Skill.fromMap(data);
     } catch (e) {
       throw e;
     }
@@ -62,7 +48,7 @@ class Skills with ChangeNotifier {
   Future<void> toggleVisibility(String id, bool state) async {
     await adminRef.child('skills').child(id).update({'hidden': !state});
     Skill selectedSkill = _skills.firstWhere((skill) => skill.id == id);
-    selectedSkill.isHidden = !state;
+    selectedSkill.hidden = !state;
     Toast.showToast(
         message: '${selectedSkill.name} is now ${state ? 'visible' : 'hidden'}',
         type: ToastType.success);

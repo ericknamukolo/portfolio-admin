@@ -60,10 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
-  void showAd(String adUnit) {
-    AdManager.loadInterstitialAd(adUnit: adUnit);
-  }
-
   @override
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> menuItems = [
@@ -123,6 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Text(
                           '${packageInfo!.appName} v${packageInfo!.version} #${packageInfo!.buildNumber} ${packageInfo!.installerStore ?? ''}',
+                          textAlign: TextAlign.center,
                           style: kBodyTextStyleGrey.copyWith(fontSize: 9)),
                     ],
                   ),
@@ -221,22 +218,18 @@ class _HomeScreenState extends State<HomeScreen> {
               GButton(
                 icon: Iconsax.home5,
                 text: 'Home',
-                onPressed: () => showAd(AdUnits.interTestAd),
               ),
               GButton(
                 icon: Iconsax.message5,
                 text: 'Messages',
-                onPressed: () => showAd(AdUnits.interTestAd),
               ),
               GButton(
                 icon: Iconsax.code_15,
                 text: 'Skills',
-                onPressed: () => showAd(AdUnits.interTestAd),
               ),
               GButton(
                 icon: Iconsax.mobile_programming5,
                 text: 'Projects',
-                onPressed: () => showAd(AdUnits.interTestAd),
               ),
             ],
             selectedIndex: _selectedIndex,
