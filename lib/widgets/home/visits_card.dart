@@ -39,7 +39,7 @@ class VisitsCard extends StatelessWidget {
             if (title == 'Manage Work Experience') {
               Navigator.of(context).pushNamed(ExperienceScreen.routeName);
               Future.delayed(Duration(seconds: 3)).then((_) =>
-                  AdManager.loadInterstitialAd(adUnit: AdUnits.interWorkAd));
+                  AdManager.loadInterstitialAd(adUnit: AdUnits.interTestAd));
             }
           },
           child: Container(

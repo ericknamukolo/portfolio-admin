@@ -18,7 +18,7 @@ class SkillCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: skill.isHidden ? .4 : 1,
+      opacity: skill.hidden ? .4 : 1,
       child: Container(
         padding: EdgeInsets.all(10),
         margin: EdgeInsets.symmetric(horizontal: 15),
@@ -44,7 +44,7 @@ class SkillCard extends StatelessWidget {
                   margin: EdgeInsets.only(right: 10),
                   height: 55,
                   width: 55,
-                  child: Image.network(skill.iconUrl),
+                  child: Image.network(skill.img),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,18 +56,18 @@ class SkillCard extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     await Provider.of<Skills>(context, listen: false)
-                        .toggleVisibility(skill.id, skill.isHidden);
+                        .toggleVisibility(skill.id!, skill.hidden);
                   },
                   child: Icon(
-                    skill.isHidden ? Iconsax.eye_slash5 : Iconsax.eye4,
-                    color: skill.isHidden ? kGreyColor : kPrimaryColor,
+                    skill.hidden ? Iconsax.eye_slash5 : Iconsax.eye4,
+                    color: skill.hidden ? kGreyColor : kPrimaryColor,
                   ),
                 ),
                 SizedBox(width: 20),
                 GestureDetector(
                   onLongPress: () async {
                     await Provider.of<Skills>(context, listen: false)
-                        .deleteSkill(skill.id);
+                        .deleteSkill(skill.id!);
                   },
                   child: Icon(
                     Icons.delete_rounded,

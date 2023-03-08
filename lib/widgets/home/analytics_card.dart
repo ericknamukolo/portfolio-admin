@@ -76,7 +76,7 @@ class AnalyticsCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushNamed(NotificationsScreen.routeName);
         Future.delayed(Duration(seconds: 3)).then(
-            (_) => AdManager.loadInterstitialAd(adUnit: AdUnits.interNotiAd));
+            (_) => AdManager.loadInterstitialAd(adUnit: AdUnits.interTestAd));
       },
       child: Container(
         padding: EdgeInsets.all(10),

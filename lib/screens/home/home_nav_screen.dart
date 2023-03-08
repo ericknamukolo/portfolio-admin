@@ -29,6 +29,7 @@ class HomeNavScreen extends StatelessWidget {
       'playStore',
       'whatsApp'
     ];
+
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
