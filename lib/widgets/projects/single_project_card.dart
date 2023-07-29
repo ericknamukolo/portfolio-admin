@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:portfolio/constants/colors.dart';
-import 'package:portfolio/constants/constants.dart';
-import 'package:portfolio/models/project.dart';
+import 'package:portfolio_admin/constants/text.dart';
+import 'package:portfolio_admin/widgets/projects/project_icon_btn.dart';
 
-import '../../widgets/custom_chip.dart';
-import '../../widgets/project_icon_btn.dart';
+import '../../constants/colors.dart';
+import '../../models/project.dart';
+import 'custom_chip.dart';
 
 class SingleProjectCard extends StatelessWidget {
   final Project project;
@@ -28,9 +28,9 @@ class SingleProjectCard extends StatelessWidget {
             width: double.infinity,
             height: _screenWidth * .521,
             decoration: BoxDecoration(
-              color: klightDarkColor,
+              color: Colors.white,
               border: Border.all(
-                color: kprimaryColor,
+                color: kPrimaryColor,
                 width: 2.0,
               ),
               borderRadius: BorderRadius.circular(10.0),
@@ -51,7 +51,7 @@ class SingleProjectCard extends StatelessWidget {
                 children: [
                   Text(
                     project.name,
-                    style: kMiniTitleTextStyleWhite.copyWith(
+                    style: kBodyTextStyleGrey.copyWith(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       letterSpacing: 1,
@@ -61,23 +61,23 @@ class SingleProjectCard extends StatelessWidget {
                     children: [
                       ProjectIconBtn(
                           icon: MdiIcons.github,
-                          link: project.githubLink,
+                          link: project.githubLink!,
                           padding: 4),
                       ProjectIconBtn(
                           icon: MdiIcons.link,
-                          link: project.externalLink,
+                          link: project.externalLink!,
                           padding: 4),
                       ProjectIconBtn(
                           icon: MdiIcons.googlePlay,
-                          link: project.playstoreLink,
+                          link: project.playstoreLink!,
                           padding: 4),
                     ],
                   ),
                 ],
-              ),       
+              ),
               Text(
                 project.description,
-                style: kNormalTextStyleGrey,
+                style: kBodyTextStyleGrey,
               ),
               const SizedBox(height: 5),
               Row(
