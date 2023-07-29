@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../constants/colors.dart';
+
 class IconHover extends StatefulWidget {
   final IconData icon;
   final Color color;
@@ -21,26 +23,10 @@ class _IconHoverState extends State<IconHover> {
   Color initialColor = const Color(0xffB3A595);
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      onEnter: (_) {
-        setState(() {
-          initialColor = widget.color;
-        });
-      },
-      onExit: (_) {
-        setState(() {
-          initialColor = const Color(0xffB3A595);
-        });
-      },
-      child: Padding(
-        padding: EdgeInsets.only(left: widget.padding!),
-        child: IconButton(
-          icon: Icon(widget.icon, size: 23),
-          onPressed: widget.click,
-          color: initialColor,
-        ),
-      ),
+    return IconButton(
+      icon: Icon(widget.icon, size: 20),
+      onPressed: widget.click,
+      color: kGreyColor,
     );
   }
 }
