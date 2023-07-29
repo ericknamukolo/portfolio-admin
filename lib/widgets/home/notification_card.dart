@@ -10,7 +10,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../constants/colors.dart';
 import '../../constants/text.dart';
 
-
 class NotificationCard extends StatelessWidget {
   final NotiObj notification;
   const NotificationCard({required this.notification, super.key});
@@ -84,7 +83,7 @@ class NotificationCard extends StatelessWidget {
       onTap: () async {
         Uri uri =
             Uri.parse('https://whatismyipaddress.com/ip/${notification.ip}');
-        Clipboard.setData(ClipboardData(text: notification.ip));
+        Clipboard.setData(ClipboardData(text: notification.ip!));
         await launchUrl(uri);
       },
       child: Container(
