@@ -47,8 +47,10 @@ class Projects with ChangeNotifier {
         'created_at': DateTime.now().toIso8601String(),
         'cover_img': coverUrl,
         'images': images,
+        'tech': proj.tech,
       };
       await adminRef.child('projects').push().set(dataMap);
+      fetchAndSetProjects();
     } catch (e) {
       throw e;
     }
