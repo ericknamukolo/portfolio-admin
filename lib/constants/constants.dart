@@ -16,6 +16,7 @@ FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
 
 DatabaseReference adminRef = FirebaseDatabase.instance.ref().child('admin');
+DatabaseReference projectsRef = adminRef.child('projects');
 PackageInfo? packageInfo;
 
 SharedPreferences? prefs;
