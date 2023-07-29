@@ -42,7 +42,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
   final ImagePicker _picker = ImagePicker();
   File? _coverImg;
   List<XFile> _pickedImages = [];
-  List<String> tech = ['JS', 'Flutter', 'Firebase'];
+  List<String> tech = [];
   Future<void> getCover() async {
     XFile? pickedImage = await _picker.pickImage(source: ImageSource.gallery);
     if (pickedImage == null) return;
@@ -50,6 +50,18 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
     setState(() {
       _coverImg = imageTemp;
     });
+  }
+
+  @override
+  void initState() {
+    Future.delayed(Duration.zero).then((_) async {
+      try {
+        await Provider.of<Skills>(context, listen: false).fetchSkills();
+      } catch (e) {
+        Toast.showToast(message: e.toString(), type: ToastType.error);
+      }
+    });
+    super.initState();
   }
 
   @override
@@ -257,7 +269,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                         playstoreLink: _playStore.text,
                         cover: _coverImg!,
                         images: _pickedImages,
-                        tech: ['React', 'JS'],
+                        tech: tech,
                       ));
                       setState(() => _isLoading = false);
                       Navigator.of(context).pop();
