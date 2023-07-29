@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
 import '../../constants/constants.dart';
 import '../../constants/text.dart';
+import '../../widgets/custom_loading_indicator.dart';
 import '../../widgets/custom_toast.dart';
 import '../../widgets/skills/skill_card.dart';
 
@@ -46,10 +47,7 @@ class _SkillsNavScreenState extends State<SkillsNavScreen> {
   @override
   Widget build(BuildContext context) {
     return _isLoading
-        ? Center(
-            child: LoadingAnimationWidget.fourRotatingDots(
-                color: kPrimaryColor, size: 50.0),
-          )
+        ? CustomLoading()
         : SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.only(bottom: 15),
