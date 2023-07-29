@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../constants/colors.dart';
 import '../../models/project.dart';
+import '../../providers/skills.dart';
 import '../../widgets/drop_down.dart';
 import '../../widgets/projects/image_card.dart';
 
@@ -177,10 +178,12 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
               ),
               Text('Tech Used', style: kBodyTextStyleGrey),
               SizedBox(height: 5),
-              DropDown(
-                items: tech,
-                hint: 'Select Tech Used',
-                onChanged: (val) {},
+              Consumer<Skills>(
+                builder: (_, value, __) => DropDown(
+                  items: value.skills.map((skill) => skill.name).toList(),
+                  hint: 'Select Tech Used',
+                  onChanged: (val) {},
+                ),
               ),
               Wrap(
                 runSpacing: 10.0,
