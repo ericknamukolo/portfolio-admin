@@ -22,7 +22,7 @@ PackageInfo? packageInfo;
 
 SharedPreferences? prefs;
 
-bool devMode = true;
+bool devMode = false;
 
 var logger = Logger(
   printer: PrettyPrinter(
