@@ -4,6 +4,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:portfolio_admin/constants/text.dart';
 import 'package:portfolio_admin/providers/auth.dart';
+import 'package:portfolio_admin/screens/projects/projects_screen.dart';
 import 'package:portfolio_admin/screens/skills/add_skill_screen.dart';
 import 'package:portfolio_admin/screens/home/home_nav_screen.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
@@ -45,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeNavScreen(),
     MessageNavScreen(),
     SkillsNavScreen(),
-    SizedBox(),
+    ProjectsNavScreen(),
   ];
 
   @override

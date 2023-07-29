@@ -4,18 +4,19 @@ import 'package:provider/provider.dart';
 
 import '../../constants/constants.dart';
 import '../../providers/projects.dart';
-import '../../widgets/custom_loading.dart';
+import '../../widgets/custom_loading_indicator.dart';
 import '../../widgets/custom_toast.dart';
 import '../../widgets/projects/single_project_card.dart';
+import '../../widgets/screen_title.dart';
 
-class MProjectsAndDesigns extends StatefulWidget {
-  const MProjectsAndDesigns({Key? key}) : super(key: key);
+class ProjectsNavScreen extends StatefulWidget {
+  const ProjectsNavScreen({Key? key}) : super(key: key);
 
   @override
-  State<MProjectsAndDesigns> createState() => _MProjectsAndDesignsState();
+  State<ProjectsNavScreen> createState() => _MProjectsNavScreenState();
 }
 
-class _MProjectsAndDesignsState extends State<MProjectsAndDesigns> {
+class _MProjectsNavScreenState extends State<ProjectsNavScreen> {
   bool _isLoading = true;
 
   @override
@@ -43,26 +44,26 @@ class _MProjectsAndDesignsState extends State<MProjectsAndDesigns> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
-      width: double.infinity,
-      child: Column(
-        children: [
-          Consumer<Projects>(
-            builder: (context, value, __) => _isLoading
-                ? CustomLoading()
-                : ListView.builder(
-                    itemBuilder: (conetxt, index) => SingleProjectCard(
-                      project: value.projects[index],
-                    ),
-                    itemCount:
-                        value.projects.isEmpty ? 0 : value.projects.length,
+    return Consumer<Projects>(
+      builder: (context, value, __) => _isLoading
+          ? CustomLoading()
+          : SingleChildScrollView(
+              child: Column(
+                children: [
+                  ScreenTitle(
+                      data: value.projects.length.toString(),
+                      title: 'Projects'),
+                  ListView.builder(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    itemBuilder: (conetxt, index) =>
+                        SingleProjectCard(project: value.projects[index]),
+                    itemCount: value.projects.length,
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                   ),
-          ),
-        ],
-      ),
+                ],
+              ),
+            ),
     );
   }
 }
