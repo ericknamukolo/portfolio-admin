@@ -1,4 +1,3 @@
-import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:portfolio_admin/providers/skills.dart';
@@ -6,7 +5,9 @@ import 'package:provider/provider.dart';
 import '../../constants/colors.dart';
 import '../../constants/constants.dart';
 import '../../constants/text.dart';
+import '../../widgets/custom_loading_indicator.dart';
 import '../../widgets/custom_toast.dart';
+import '../../widgets/screen_title.dart';
 import '../../widgets/skills/skill_card.dart';
 
 class SkillsNavScreen extends StatefulWidget {
@@ -47,42 +48,15 @@ class _SkillsNavScreenState extends State<SkillsNavScreen> {
   @override
   Widget build(BuildContext context) {
     return _isLoading
-        ? Center(
-            child: LoadingAnimationWidget.fourRotatingDots(
-                color: kPrimaryColor, size: 50.0),
-          )
+        ? CustomLoading()
         : SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.only(bottom: 15),
               child: Consumer<Skills>(
                 builder: (context, skills, _) => Column(
                   children: [
-                    Container(
-                      margin:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-                      height: 100,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: kSecondaryColor,
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xff000000).withOpacity(0.12),
-                            blurRadius: 6.0,
-                            offset: const Offset(0.0, 3.0),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(15.0),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Skills', style: kTitleTextStyle),
-                          SizedBox(height: 5),
-                          Text(skills.skills.length.toString(),
-                              style: kTitleTextStyle),
-                        ],
-                      ),
-                    ),
+                    ScreenTitle(
+                        data: skills.skills.length.toString(), title: 'Skills'),
                     ListView.separated(
                       separatorBuilder: (context, index) =>
                           Divider(color: kGreyColor),

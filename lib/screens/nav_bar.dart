@@ -1,19 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:portfolio_admin/constants/text.dart';
 import 'package:portfolio_admin/providers/auth.dart';
+import 'package:portfolio_admin/screens/projects/projects_screen.dart';
 import 'package:portfolio_admin/screens/skills/add_skill_screen.dart';
 import 'package:portfolio_admin/screens/home/home_nav_screen.dart';
-import 'package:portfolio_admin/widgets/custom_toast.dart';
 import 'package:portfolio_admin/widgets/cutsom_app_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../constants/ad_units.dart';
 import '../constants/colors.dart';
 import '../constants/constants.dart';
-import '../services/ad_manager.dart';
 import 'messages/message_nav_screen.dart';
 import 'projects/add_project_screen.dart';
 import 'skills/skills_nav_screen.dart';
@@ -49,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeNavScreen(),
     MessageNavScreen(),
     SkillsNavScreen(),
-    SizedBox(),
+    ProjectsNavScreen(),
   ];
 
   @override
@@ -139,6 +136,8 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: _selectedIndex == 2 || _selectedIndex == 3
           ? FloatingActionButton(
               backgroundColor: kSecondaryColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0)),
               onPressed: () {
                 if (_selectedIndex == 2) {
                   Navigator.of(context).pushNamed(AddSkillScreen.routeName);
