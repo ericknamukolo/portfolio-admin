@@ -136,6 +136,8 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: _selectedIndex == 2 || _selectedIndex == 3
           ? FloatingActionButton(
               backgroundColor: kSecondaryColor,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50.0)),
               onPressed: () {
                 if (_selectedIndex == 2) {
                   Navigator.of(context).pushNamed(AddSkillScreen.routeName);

@@ -14,6 +14,8 @@ class CustomLoading extends StatelessWidget {
       width: 50,
       child: FloatingActionButton(
         onPressed: () {},
+        shape:
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
         backgroundColor: kPrimaryColor,
         child: Container(
           height: 30,
