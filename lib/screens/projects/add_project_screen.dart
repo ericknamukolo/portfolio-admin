@@ -182,7 +182,11 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                 builder: (_, value, __) => DropDown(
                   items: value.skills.map((skill) => skill.name).toList(),
                   hint: 'Select Tech Used',
-                  onChanged: (val) {},
+                  onChanged: (val) {
+                    if (!tech.contains(val)) {
+                      setState(() => tech.add(val!));
+                    }
+                  },
                 ),
               ),
               Wrap(
