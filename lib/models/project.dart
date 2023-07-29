@@ -1,25 +1,53 @@
-import 'dart:io';
+import 'dart:convert';
 
-import 'package:image_picker/image_picker.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'project.g.dart';
 
+@JsonSerializable()
 class Project {
-  String name;
-  File coverImg;
-  String des;
-  String type;
-  List<XFile> images;
-  String? googleLink;
-  String? githubLink;
-  String? externalLink;
+  String? id;
+  final String name;
+  final String type;
+  final String description;
+  @JsonKey(name: 'cover_img')
+  final dynamic cover;
+  @JsonKey(name: 'github_link')
+  final String? githubLink;
+  @JsonKey(name: 'external_link')
+  final String? externalLink;
+  @JsonKey(name: 'playstore_link')
+  final String? playstoreLink;
+  @JsonKey(name: 'created_at')
+  final String date;
+  final List<String> images;
+  final List<String> tech;
 
   Project({
+    this.id,
+    required this.playstoreLink,
     required this.name,
-    required this.des,
+    required this.date,
     required this.type,
-    required this.images,
-    required this.coverImg,
+    required this.cover,
     this.githubLink,
-    this.googleLink,
     this.externalLink,
+    required this.description,
+    required this.images,
+    required this.tech,
   });
+
+  factory Project.fromJson(Map<String, dynamic> json) =>
+      _$ProjectFromJson(json);
+  Map<String, dynamic> toJson() => _$ProjectToJson(this);
+
+  static List<Project> fromJsonList(Map<dynamic, dynamic> dataList) {
+    List<Project> _loadedprojects = [];
+    dataList.forEach((id, element) {
+      String rawJson = jsonEncode(element);
+      Project project = Project.fromJson(jsonDecode(rawJson));
+      project.id = id;
+      _loadedprojects.add(project);
+    });
+    return _loadedprojects;
+  }
 }
