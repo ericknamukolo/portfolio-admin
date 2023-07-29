@@ -18,15 +18,15 @@ class Project {
   @JsonKey(name: 'playstore_link')
   final String? playstoreLink;
   @JsonKey(name: 'created_at')
-  final String date;
-  final List<String> images;
+  final String? date;
+  final List<dynamic> images;
   final List<String> tech;
 
   Project({
     this.id,
     required this.playstoreLink,
     required this.name,
-    required this.date,
+    this.date,
     required this.type,
     required this.cover,
     this.githubLink,

@@ -226,13 +226,14 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                     setState(() => _isLoading = true);
                     await data.addProject(Project(
                       name: _name.text,
-                      des: _des.text,
+                      description: _des.text,
                       type: appType[_groupValue],
                       externalLink: _link.text,
                       githubLink: _github.text,
-                      googleLink: _playStore.text,
-                      coverImg: _coverImg!,
+                      playstoreLink: _playStore.text,
+                      cover: _coverImg!,
                       images: _pickedImages,
+                      tech: [],
                     ));
                     setState(() => _isLoading = false);
                     Navigator.of(context).pop();

@@ -14,15 +14,15 @@ class Projects with ChangeNotifier {
       final imgPath =
           'project-images/${proj.name}_${DateTime.now().toIso8601String()}';
       final ref = firebaseStorage.ref().child(imgPath);
-      uploadTask = ref.putFile(proj.coverImg);
+      uploadTask = ref.putFile(proj.cover as File);
       final snapshot = await uploadTask.whenComplete(() {});
       final coverUrl = await snapshot.ref.getDownloadURL();
       List<String> images = await uploadImages(proj);
       Map<String, dynamic> dataMap = {
         'name': proj.name,
-        'description': proj.des,
+        'description': proj.description,
         'type': proj.type,
-        'playstore_link': proj.googleLink,
+        'playstore_link': proj.playstoreLink,
         'github_link': proj.githubLink,
         'external_link': proj.externalLink,
         'created_at': DateTime.now().toIso8601String(),
@@ -38,7 +38,7 @@ class Projects with ChangeNotifier {
   Future<List<String>> uploadImages(Project proj) async {
     UploadTask uploadTask;
     List<String> images = [];
-    for (XFile img in proj.images) {
+    for (XFile img in proj.images as List<XFile>) {
       final imgPath =
           'project-images/${proj.name}_${DateTime.now().toIso8601String()}';
       final ref = firebaseStorage.ref().child(imgPath);
