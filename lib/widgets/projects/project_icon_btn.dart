@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/constants/constants.dart';
-
-import '../constants/colors.dart';
-import '../desktop/widgets/icon_hover.dart';
+import 'package:portfolio_admin/constants/constants.dart';
+import 'package:portfolio_admin/widgets/projects/icon_hover.dart';
+import '../../constants/colors.dart';
 
 class ProjectIconBtn extends StatelessWidget {
   final IconData icon;
@@ -21,8 +20,8 @@ class ProjectIconBtn extends StatelessWidget {
       visible: link.isNotEmpty,
       child: IconHover(
         icon: icon,
-        color: kprimaryColor,
-        click: () => AppData.goToLink(link),
+        color: kPrimaryColor,
+        click: () => Links.goToLink(link),
         padding: padding ?? 0,
       ),
     );

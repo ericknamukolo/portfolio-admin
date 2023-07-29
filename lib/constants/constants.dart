@@ -7,6 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../widgets/custom_toast.dart';
 
@@ -30,6 +31,12 @@ var logger = Logger(
     printEmojis: true,
   ),
 );
+
+class Links {
+  static void goToLink(String url) async {
+    await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+  }
+}
 
 class Toast {
   static void showToast({required String message, required ToastType type}) {
