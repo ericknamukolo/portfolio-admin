@@ -117,7 +117,20 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
       floatingActionButton: _isLoading ? CustomLoading() : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: CustomAppBar(
-          title: '${_isEdit ? 'Edit' : 'Add'} Project', showLeading: true),
+          title: '${_isEdit ? 'Edit' : 'Add'} Project',
+          showLeading: true,
+          action: _isEdit
+              ? GestureDetector(
+                  onLongPress: () =>
+                      Provider.of<Projects>(context, listen: false)
+                          .deleteProject(projectId!, context),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.delete),
+                    color: Colors.white,
+                  ),
+                )
+              : null),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
