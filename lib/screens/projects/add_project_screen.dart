@@ -271,11 +271,12 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                         images: _pickedImages,
                         tech: tech,
                       ));
-                      setState(() => _isLoading = false);
+
                       Navigator.of(context).pop();
                     } catch (e) {
                       Toast.showToast(
                           message: e.toString(), type: ToastType.error);
+                    } finally {
                       setState(() => _isLoading = false);
                     }
                   },

@@ -56,7 +56,7 @@ class _MProjectsNavScreenState extends State<ProjectsNavScreen> {
                       title: 'Projects'),
                   ListView.separated(
                     separatorBuilder: (context, index) => SizedBox(height: 15),
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    padding: EdgeInsets.only(left: 15, right: 15, bottom: 20),
                     itemBuilder: (conetxt, index) =>
                         SingleProjectCard(project: value.projects[index]),
                     itemCount: value.projects.length,
