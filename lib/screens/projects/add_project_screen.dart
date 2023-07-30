@@ -32,15 +32,16 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
   bool _isLoading = false;
   List<String> appType = ['Mobile', 'Web/Windows'];
   int _groupValue = 0;
-
-  final TextEditingController _name = TextEditingController();
-  final TextEditingController _des = TextEditingController();
-  final TextEditingController _playStore = TextEditingController();
-  final TextEditingController _link = TextEditingController();
-  final TextEditingController _github = TextEditingController();
+  bool _isEdit = false;
+  TextEditingController _name = TextEditingController();
+  TextEditingController _des = TextEditingController();
+  TextEditingController _playStore = TextEditingController();
+  TextEditingController _link = TextEditingController();
+  TextEditingController _github = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
   File? _coverImg;
+  String? projectId;
   List<XFile> _pickedImages = [];
   List<String> tech = [];
   Future<void> getCover() async {
@@ -55,6 +56,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
   @override
   void initState() {
     Future.delayed(Duration.zero).then((_) async {
+      autoFillFields();
       try {
         await Provider.of<Skills>(context, listen: false).fetchSkills();
       } catch (e) {
@@ -62,6 +64,34 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
       }
     });
     super.initState();
+  }
+
+  void autoFillFields() {
+    Project? project = ModalRoute.of(context)!.settings.arguments as Project?;
+    if (project == null) return;
+    setState(() {
+      _isEdit = true;
+      projectId = project.id;
+      _groupValue = appType.indexOf(project.type);
+      tech = project.tech;
+      _name = TextEditingController(text: project.name);
+      _des = TextEditingController(text: project.description);
+      _playStore = TextEditingController(text: project.playstoreLink);
+      _link = TextEditingController(text: project.externalLink);
+      _github = TextEditingController(text: project.githubLink);
+    });
+  }
+
+  Future makeRequest(Future fn) async {
+    try {
+      setState(() => _isLoading = true);
+      await fn;
+      Navigator.of(context).pop();
+    } catch (e) {
+      Toast.showToast(message: e.toString(), type: ToastType.error);
+    } finally {
+      setState(() => _isLoading = false);
+    }
   }
 
   @override
@@ -86,7 +116,8 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
     return Scaffold(
       floatingActionButton: _isLoading ? CustomLoading() : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      appBar: CustomAppBar(title: 'Add Project', showLeading: true),
+      appBar: CustomAppBar(
+          title: '${_isEdit ? 'Edit' : 'Add'} Project', showLeading: true),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -255,29 +286,24 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
               ),
               Consumer<Projects>(
                 builder: (context, data, _) => CustomButton(
-                  btnText: 'Add Project',
+                  btnText: _isEdit ? 'Save Changes' : 'Add Project',
                   isLoading: _isLoading,
-                  click: () async {
-                    try {
-                      setState(() => _isLoading = true);
-                      await data.addProject(Project(
-                        name: _name.text,
-                        description: _des.text,
-                        type: appType[_groupValue],
-                        externalLink: _link.text,
-                        githubLink: _github.text,
-                        playstoreLink: _playStore.text,
-                        cover: _coverImg!,
-                        images: _pickedImages,
-                        tech: tech,
-                      ));
-                      setState(() => _isLoading = false);
-                      Navigator.of(context).pop();
-                    } catch (e) {
-                      Toast.showToast(
-                          message: e.toString(), type: ToastType.error);
-                      setState(() => _isLoading = false);
-                    }
+                  click: () {
+                    Project proj = Project(
+                      id: projectId,
+                      name: _name.text,
+                      description: _des.text,
+                      type: appType[_groupValue],
+                      externalLink: _link.text,
+                      githubLink: _github.text,
+                      playstoreLink: _playStore.text,
+                      cover: _coverImg,
+                      images: _pickedImages,
+                      tech: tech,
+                    );
+                    makeRequest(_isEdit
+                        ? data.updateProject(proj)
+                        : data.addProject(proj));
                   },
                 ),
               ),

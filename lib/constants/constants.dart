@@ -22,8 +22,6 @@ PackageInfo? packageInfo;
 
 SharedPreferences? prefs;
 
-bool devMode = false;
-
 var logger = Logger(
   printer: PrettyPrinter(
     colors: true,
