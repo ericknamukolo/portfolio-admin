@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
-
-import '../../constants/colors.dart';
 import '../../constants/constants.dart';
 import '../../providers/projects.dart';
 import '../../widgets/custom_loading_indicator.dart';
