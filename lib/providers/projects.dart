@@ -56,6 +56,21 @@ class Projects with ChangeNotifier {
     }
   }
 
+  Future updateProject(Project proj) async {
+    Map<String, dynamic> dataMap = {
+      'name': proj.name,
+      'description': proj.description,
+      'type': proj.type,
+      'playstore_link': proj.playstoreLink,
+      'github_link': proj.githubLink,
+      'external_link': proj.externalLink,
+      'tech': proj.tech,
+    };
+    await adminRef.child('projects').child(proj.id!).update(dataMap);
+    fetchAndSetProjects();
+    notifyListeners();
+  }
+
   Future<List<String>> uploadImages(Project proj) async {
     UploadTask uploadTask;
     List<String> images = [];
