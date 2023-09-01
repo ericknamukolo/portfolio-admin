@@ -8,6 +8,7 @@ import 'package:portfolio_admin/constants/constants.dart';
 import 'package:portfolio_admin/constants/text.dart';
 import 'package:portfolio_admin/screens/nav_bar.dart';
 import 'package:portfolio_admin/screens/sign_in_screen.dart';
+import 'package:in_app_update/in_app_update.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,7 +20,10 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(Duration(seconds: 5), () async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    checkUpdate();
+    Timer(Duration(seconds: 2), () async {
       packageInfo = await PackageInfo.fromPlatform();
       Navigator.of(context).pushReplacementNamed(
           firebaseAuth.currentUser == null
@@ -27,6 +31,14 @@ class _SplashScreenState extends State<SplashScreen> {
               : HomeScreen.routeName);
     });
     super.initState();
+  }
+
+  void checkUpdate() async {
+    AppUpdateInfo info = await InAppUpdate.checkForUpdate();
+
+    if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+      await InAppUpdate.performImmediateUpdate();
+    }
   }
 
   @override
