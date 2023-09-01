@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:portfolio_admin/models/project.dart';
 
@@ -48,6 +49,7 @@ class Projects with ChangeNotifier {
         'cover_img': coverUrl,
         'images': images,
         'tech': proj.tech,
+        'is_personal': proj.isPersonal,
       };
       await adminRef.child('projects').push().set(dataMap);
       fetchAndSetProjects();
@@ -65,9 +67,19 @@ class Projects with ChangeNotifier {
       'github_link': proj.githubLink,
       'external_link': proj.externalLink,
       'tech': proj.tech,
+      'is_personal': proj.isPersonal,
     };
     await adminRef.child('projects').child(proj.id!).update(dataMap);
     fetchAndSetProjects();
+    notifyListeners();
+  }
+
+  Future<void> deleteProject(String id, BuildContext context) async {
+    await adminRef.child('projects').child(id).remove();
+    Navigator.of(context).pop();
+    Project selectedProject =
+        _projects.firstWhere((element) => element.id == id);
+    _projects.remove(selectedProject);
     notifyListeners();
   }
 

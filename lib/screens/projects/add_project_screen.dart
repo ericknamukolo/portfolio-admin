@@ -32,6 +32,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
   bool _isLoading = false;
   List<String> appType = ['Mobile', 'Web/Windows'];
   int _groupValue = 0;
+  int _projectType = 0;
   bool _isEdit = false;
   TextEditingController _name = TextEditingController();
   TextEditingController _des = TextEditingController();
@@ -79,6 +80,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
       _playStore = TextEditingController(text: project.playstoreLink);
       _link = TextEditingController(text: project.externalLink);
       _github = TextEditingController(text: project.githubLink);
+      _groupValue = project.isPersonal ? 0 : 1;
     });
   }
 
@@ -117,7 +119,20 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
       floatingActionButton: _isLoading ? CustomLoading() : null,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: CustomAppBar(
-          title: '${_isEdit ? 'Edit' : 'Add'} Project', showLeading: true),
+          title: '${_isEdit ? 'Edit' : 'Add'} Project',
+          showLeading: true,
+          action: _isEdit
+              ? GestureDetector(
+                  onLongPress: () =>
+                      Provider.of<Projects>(context, listen: false)
+                          .deleteProject(projectId!, context),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.delete),
+                    color: Colors.white,
+                  ),
+                )
+              : null),
       body: SingleChildScrollView(
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -155,6 +170,26 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                     activeColor: kPrimaryColor,
                   ),
                   Text('Web/Windows', style: kBodyTextStyleGrey),
+                ],
+              ),
+              Text('Project Type', style: kBodyTextStyleGrey),
+              Row(
+                children: [
+                  Radio(
+                    value: 0,
+                    groupValue: _projectType,
+                    onChanged: (val) => setState(() => _projectType = val!),
+                    activeColor: kPrimaryColor,
+                  ),
+                  Text('Personal', style: kBodyTextStyleGrey),
+                  const SizedBox(width: 10),
+                  Radio(
+                    value: 1,
+                    groupValue: _projectType,
+                    onChanged: (val) => setState(() => _projectType = val!),
+                    activeColor: kPrimaryColor,
+                  ),
+                  Text('Work/Client', style: kBodyTextStyleGrey),
                 ],
               ),
               Text('Images', style: kBodyTextStyleGrey),
@@ -300,6 +335,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                       cover: _coverImg,
                       images: _pickedImages,
                       tech: tech,
+                      isPersonal: _projectType == 0,
                     );
                     makeRequest(_isEdit
                         ? data.updateProject(proj)

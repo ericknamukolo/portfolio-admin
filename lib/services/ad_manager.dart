@@ -23,7 +23,7 @@ class AdManager {
 
   static void loadAppOpenAd() {
     AppOpenAd.load(
-      adUnitId: AdUnits.appOpenTestAd,
+      adUnitId: AdUnits.appOpen,
       request: const AdRequest(),
       adLoadCallback: AppOpenAdLoadCallback(onAdLoaded: (ad) async {
         AppOpenAd loadedAd = ad;

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:portfolio_admin/constants/constants.dart';
 part 'project.g.dart';
 
 @JsonSerializable()
@@ -22,6 +21,8 @@ class Project {
   final String? date;
   final List<dynamic> images;
   final List<String> tech;
+  @JsonKey(name: 'is_personal')
+  final bool isPersonal;
 
   Project({
     this.id,
@@ -35,6 +36,7 @@ class Project {
     required this.description,
     required this.images,
     required this.tech,
+    required this.isPersonal,
   });
 
   factory Project.fromJson(Map<String, dynamic> json) =>
