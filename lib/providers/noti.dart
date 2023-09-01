@@ -49,6 +49,15 @@ class Noti with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> deleteAll() async {
+    await adminRef.child('notifications').remove();
+    _notifications.clear();
+
+    Toast.showToast(
+        message: 'All Notifications deleted', type: ToastType.success);
+    notifyListeners();
+  }
+
   List<NotiCategory> categories = [
     NotiCategory(name: 'all', isSelected: true),
     NotiCategory(name: 'visit'),

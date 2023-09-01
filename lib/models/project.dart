@@ -22,6 +22,7 @@ class Project {
   final String? date;
   final List<dynamic> images;
   final List<String> tech;
+  final bool isPersonal;
 
   Project({
     this.id,
@@ -35,6 +36,7 @@ class Project {
     required this.description,
     required this.images,
     required this.tech,
+    required this.isPersonal,
   });
 
   factory Project.fromJson(Map<String, dynamic> json) =>

@@ -49,6 +49,7 @@ class Projects with ChangeNotifier {
         'cover_img': coverUrl,
         'images': images,
         'tech': proj.tech,
+        'is_personal': proj.isPersonal,
       };
       await adminRef.child('projects').push().set(dataMap);
       fetchAndSetProjects();
@@ -66,6 +67,7 @@ class Projects with ChangeNotifier {
       'github_link': proj.githubLink,
       'external_link': proj.externalLink,
       'tech': proj.tech,
+      'is_personal': proj.isPersonal,
     };
     await adminRef.child('projects').child(proj.id!).update(dataMap);
     fetchAndSetProjects();

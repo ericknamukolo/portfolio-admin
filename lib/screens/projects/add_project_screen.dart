@@ -32,6 +32,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
   bool _isLoading = false;
   List<String> appType = ['Mobile', 'Web/Windows'];
   int _groupValue = 0;
+  int _projectType = 0;
   bool _isEdit = false;
   TextEditingController _name = TextEditingController();
   TextEditingController _des = TextEditingController();
@@ -168,6 +169,26 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                     activeColor: kPrimaryColor,
                   ),
                   Text('Web/Windows', style: kBodyTextStyleGrey),
+                ],
+              ),
+              Text('Project Type', style: kBodyTextStyleGrey),
+              Row(
+                children: [
+                  Radio(
+                    value: 0,
+                    groupValue: _projectType,
+                    onChanged: (val) => setState(() => _projectType = val!),
+                    activeColor: kPrimaryColor,
+                  ),
+                  Text('Personal', style: kBodyTextStyleGrey),
+                  const SizedBox(width: 10),
+                  Radio(
+                    value: 1,
+                    groupValue: _projectType,
+                    onChanged: (val) => setState(() => _projectType = val!),
+                    activeColor: kPrimaryColor,
+                  ),
+                  Text('Work/Client', style: kBodyTextStyleGrey),
                 ],
               ),
               Text('Images', style: kBodyTextStyleGrey),
@@ -313,6 +334,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                       cover: _coverImg,
                       images: _pickedImages,
                       tech: tech,
+                      isPersonal: _projectType == 0,
                     );
                     makeRequest(_isEdit
                         ? data.updateProject(proj)
