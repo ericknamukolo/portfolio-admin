@@ -39,6 +39,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
   TextEditingController _playStore = TextEditingController();
   TextEditingController _link = TextEditingController();
   TextEditingController _github = TextEditingController();
+  TextEditingController _customTech = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
   File? _coverImg;
@@ -265,6 +266,21 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
                       setState(() => tech.add(val!));
                     }
                   },
+                ),
+              ),
+              CustomTextField(
+                hint: 'Custom Tech used',
+                preIcon: Icons.folder,
+                tc: TextCapitalization.none,
+                data: _customTech,
+                suffIcon: IconButton(
+                  onPressed: () async {
+                    if (!tech.contains(_customTech.text.trim())) {
+                      setState(() => tech.add(_customTech.text.trim()));
+                    }
+                    _customTech.clear();
+                  },
+                  icon: Icon(Icons.add, color: kPrimaryColor),
                 ),
               ),
               Wrap(
