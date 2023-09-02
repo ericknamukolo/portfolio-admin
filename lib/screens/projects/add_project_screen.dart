@@ -80,7 +80,7 @@ class _AddProjectScreenState extends State<AddProjectScreen> {
       _playStore = TextEditingController(text: project.playstoreLink);
       _link = TextEditingController(text: project.externalLink);
       _github = TextEditingController(text: project.githubLink);
-      _groupValue = project.isPersonal ? 0 : 1;
+      _projectType = project.isPersonal ? 0 : 1;
     });
   }
 

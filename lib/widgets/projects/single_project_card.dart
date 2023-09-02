@@ -77,7 +77,8 @@ class SingleProjectCard extends StatelessWidget {
                 style: kBodyTextStyleGrey.copyWith(fontSize: 11),
               ),
               const SizedBox(height: 8),
-              Row(
+              Wrap(
+                  runSpacing: 10.0,
                   children: project.tech
                       .map((tech) => CustomChip(name: tech))
                       .toList()),
